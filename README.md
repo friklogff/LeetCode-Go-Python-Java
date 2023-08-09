@@ -6,5 +6,7 @@ https://github.com/halfrost/LeetCode-Go
   - 0001.Two-Sum
 - 2023-08-08
   - LeetCode-Go-Python-Java更名LeetCode-Go-Python-Java-C
-  - 0001.Two-Sum
   - 0002.Add-Two-Numbers
+- 2023-08-09
+  - 0003.Longest-Substring-Without-Repeating-Characters
+
