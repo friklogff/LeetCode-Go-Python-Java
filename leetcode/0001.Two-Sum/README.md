@@ -46,6 +46,14 @@ Java:
 3. 判断another是否在Map中,如果存在直接返回两个索引
 4. 如果another不在Map中,将当前元素和索引存入Map
 5. 遍历结束若无结果则返回空数组new int[0]
+
+C++：
+1. 使用unordered_map来保存元素值和索引的映射关系。 
+2. 遍历数组nums，对于每个元素，计算目标值与当前元素的差值another。 
+3. 在unordered_map中查找another是否存在，如果存在则返回两个索引。 
+4. 如果unordered_map中不存在another，则将当前元素和索引存入unordered_map。 
+5. 遍历结束后，如果没有找到结果，则返回一个空的结果数组。
+
 ## Go
 ```Go
 func twoSum(nums []int, target int) []int {
@@ -130,7 +138,35 @@ class Solution {
 }
 
 ```
-三个版本两数之和解法所需的基础知识:
+## Cpp
+```Cpp
+#include <vector>
+#include <unordered_map>
+
+class Solution {
+public:
+    std::vector<int> twoSum(std::vector<int>& nums, int target) {
+        std::unordered_map<int, int> m; // 创建一个unordered_map用于存储元素和索引的对应关系
+        std::vector<int> result;
+
+        for (int i = 0; i < nums.size(); i++) {
+            int another = target - nums[i]; // 计算需要的另一个数
+
+            if (m.find(another) != m.end()) { // 在map中查找是否存在该数
+                result.push_back(m[another]); // 将对应的索引添加到结果数组中
+                result.push_back(i);
+                return result;
+            }
+
+            m[nums[i]] = i; // 将当前元素和索引存入map
+        }
+
+        return result; // 遍历完成后仍未找到符合条件的数对，返回空的结果数组
+    }
+};
+
+```
+四个版本两数之和解法所需的基础知识:
 
 Go 版本:
 1. map:Go中内置的字典类型,用于存储键值对。查找时间复杂度 O(1)。
@@ -151,3 +187,11 @@ Java 版本:
 3. containsKey():Map中的方法,判断是否包含指定的键。
 4. 语法:条件判断、循环、方法定义、数组索引等基础语法。
 
+C++版本：
+
+1. unordered_map：C++中的哈希表实现，用于存储键值对。查找速度快，时间复杂度为O(1)。 
+2. vector：C++中的动态数组，可变长度的序列容器，支持快速插入和访问元素。 
+3. for循环：C++中的循环结构，用于遍历数组或其他可迭代对象。 
+4. if语句：C++中的条件判断语句，用于根据条件执行不同的代码块。 
+5. 数组索引：C++中使用方括号和索引值来访问数组中的元素。 
+6. 以上是C++版本解题所需的基础知识，这些知识点在解题过程中用于实现对数组和哈希表的访问、遍历和判断操作。
