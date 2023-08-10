@@ -9,4 +9,6 @@ https://github.com/halfrost/LeetCode-Go
   - 0002.Add-Two-Numbers
 - 2023-08-09
   - 0003.Longest-Substring-Without-Repeating-Characters
+- 2023-08-10
+  - 0004.Median-of-Two-Sorted-Arrays
 
