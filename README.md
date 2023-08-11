@@ -11,4 +11,6 @@ https://github.com/halfrost/LeetCode-Go
   - 0003.Longest-Substring-Without-Repeating-Characters
 - 2023-08-10
   - 0004.Median-of-Two-Sorted-Arrays
+- 2023-08-11
+  - 0005.Longest-Palindromic-Substring
 
