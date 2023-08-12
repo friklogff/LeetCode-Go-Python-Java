@@ -13,4 +13,6 @@ https://github.com/halfrost/LeetCode-Go
   - 0004.Median-of-Two-Sorted-Arrays
 - 2023-08-11
   - 0005.Longest-Palindromic-Substring
+- 2023-08-12
+  - 0006.ZigZag-Conversion
 
