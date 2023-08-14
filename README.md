@@ -17,4 +17,6 @@ https://github.com/halfrost/LeetCode-Go
   - 0006.ZigZag-Conversion
 - 2023-08-13
   - 0007.Reverse-Integer
+- 2023-08-14
+  - 0008.String-to-Integer-atoi
 
