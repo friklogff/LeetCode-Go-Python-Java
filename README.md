@@ -29,3 +29,5 @@ https://github.com/halfrost/LeetCode-Go
   - 0012.Integer-to-Roman
 - 2023-08-19
   - 0013.Roman-to-Integer
+- 2023-08-20
+  - 0014.Longest-Common-Prefix
