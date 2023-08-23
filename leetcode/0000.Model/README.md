@@ -91,18 +91,17 @@ func threeSumClosest(nums []int, target int) int {
 
 你能用同样的思路同样数量的解法用Python实现么，以此为开头，给出带注释完整代码
 class Solution:
-    def threeSum(self, nums: List[int]) -> List[List[int]]:
-
+    def letterCombinations(self, digits: str) -> List[str]:
 你能用同样的思路同样数量的解法用Java实现么，以此为开头，给出带注释完整代码
 class Solution {
-    public int threeSumClosest(int[] nums, int target) {
+    public List<String> letterCombinations(String digits) {
 
     }
 }
 你能用同样的思路同样数量的解法用c++实现么，以此为开头，给出带注释完整代码
 class Solution {
 public:
-    int threeSumClosest(vector<int>& nums, int target) {
+    vector<string> letterCombinations(string digits) {
 
     }
 };
