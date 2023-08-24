@@ -1,68 +1,6 @@
 ## 代码
 ## Go
 ```Go
-func threeSumClosest(nums []int, target int) int {
-    n := len(nums)             // 获取数组长度
-    sort.Ints(nums)            // 对数组进行升序排序
-    minDiff := math.MaxInt     // 初始化最小差值为整型最大值
-    var ans int                // 用于存储最接近目标的和
-
-    for i := 0; i < n-2; i++ { // 遍历数组，从第一个元素到倒数第三个元素
-        if i > 0 && nums[i] == nums[i-1] {
-            // 跳过重复的元素，避免重复计算
-            continue
-        }
-
-        // 尝试以当前元素为基准，计算三个元素的和
-        sum := nums[i] + nums[i+1] + nums[i+2]
-
-        if sum > target {
-            // 如果和大于目标值，判断差值是否更小，若是则更新结果
-            if sum - target < minDiff {
-                ans = sum
-            }
-            break  // 由于数组已经排序，之后的和会更大，不必再继续遍历
-        }
-
-        // 尝试以当前元素为基准，和最大的两个元素相加
-        sum = nums[i] + nums[n-2] + nums[n-1]
-
-        if sum < target {
-            // 如果和小于目标值，判断差值是否更小，若是则更新结果
-            if target - sum < minDiff {
-                minDiff = target - sum
-                ans = sum
-            }
-            continue  // 继续尝试更大的和
-        }
-
-        // 使用双指针法在剩余区间内查找最接近目标值的和
-        j, k := i+1, n-1
-        for j < k {
-            sum = nums[i] + nums[j] + nums[k]
-            if sum == target {
-                // 如果和等于目标值，直接返回
-                return target
-            }
-            if sum > target {
-                // 如果和大于目标值，判断差值是否更小，若是则更新结果
-                if sum - target < minDiff {
-                    minDiff = sum - target
-                    ans = sum
-                }
-                k--  // 缩小右侧指针的范围
-            } else {
-                // 如果和小于目标值，判断差值是否更小，若是则更新结果
-                if target - sum < minDiff {
-                    minDiff = target - sum
-                    ans = sum
-                }
-                j++  // 增大左侧指针的范围
-            }
-        }
-    }
-    return ans  // 返回最接近目标值的和
-}
 
 ```
 ## Python
@@ -80,28 +18,154 @@ func threeSumClosest(nums []int, target int) int {
 
 ## Prompt
 ```Prompt
-
-```
 我们用中文交流，你能理解这段代码么，逐行加上注释
+//全双指针
+import java.util.AbstractList;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
+class Solution {
+    public List<List<Integer>> threeSum(int[] nums) {
+        return nSum(nums, 3, 0);
+    }
 
-给出完赛后带注释完整代码
+    public List<List<Integer>> fourSum(int[] nums, int target) {
+        return nSum(nums, 4, target);
+    }
+
+    List<List<Integer>> nSum(int[] a, int n, long target) {
+        return new AbstractList<List<Integer>>() {
+            final List<List<Integer>> res = new ArrayList<>();
+            final List<Integer> path = new ArrayList<>();
+
+            @Override
+            public int size() {
+                init();
+                return res.size();
+            }
+
+            @Override
+            public List<Integer> get(int index) {
+                init();
+                return res.get(index);
+            }
+
+            void init() {
+                if (res.isEmpty()) {
+                    Arrays.sort(a);
+                    dfs(a, 0, a.length - 1, n, target);
+                }
+            }
+
+            void dfs(int[] a, int i, int j, int n, long target) {
+                if (n == 2) {
+                    two(a, i, j, target);
+                } else if (n > 2) {
+                    hit(a, i, j, n, target);
+                }
+            }
+
+            void two(int[] a, int i, int j, long target) {
+                if (i >= j) {
+                    return;
+                }
+                long max = 0;
+                long min = 0;
+                for (int k = 0; k < 2; k++) {
+                    min += a[i + k];
+                    max += a[j - k];
+                }
+                if (target < min || target > max) {
+                    return;
+                }
+                while (j > i) {
+                    long sum = a[i] + a[j];
+                    if (sum < target) {
+                        i++;
+                    } else if (sum > target) {
+                        j--;
+                    } else {
+                        path.add(a[i]);
+                        path.add(a[j]);
+                        res.add(new ArrayList<>(path));
+                        path.remove(path.size() - 1);
+                        path.remove(path.size() - 1);
+                        while (j > i && a[i] == a[i + 1]) {
+                            i++;
+                        }
+                        while (j > i && a[i] == a[j - 1]) {
+                            j--;
+                        }
+                        i++;
+                        j--;
+                    }
+                }
+            }
+
+            void hit(int[] a, int i, int j, int n, long target) {
+                int begin = i;
+                int end = j;
+                if (i + n - 2 >= j) {
+                    return;
+                }
+                long max = 0;
+                long min = 0;
+                for (int k = 0; k < n; k++) {
+                    min += a[i + k];
+                    max += a[j - k];
+                }
+                if (target < min || target > max) {
+                    return;
+                }
+                while (j > i + n - 2) {
+                    long sufMax = 0;
+                    long preMin = 0;
+                    for (int k = 0; k < n - 1; k++) {
+                        preMin += a[i + k];
+                        sufMax += a[j - k];
+                    }
+                    preMin += a[j];
+                    sufMax += a[i];
+                    if (sufMax < target) {
+                        i++;
+                    } else if (preMin > target) {
+                        j--;
+                    } else {
+                        while (i != begin && j > i + n - 2 && a[i] == a[i - 1]) {
+                            i++;
+                        }
+                        while (j != end && j > i + n - 2 && a[j] == a[j + 1]) {
+                            j--;
+                        }
+                        path.add(a[i]);
+                        dfs(a, i + 1, j, n - 1, target - a[i]);
+                        path.remove(path.size() - 1);
+                        i++;
+                    }
+                }
+            }
+        };
+    }
+}
+
+给出完善后带注释完整代码
 
 给出测试输出语句
 
 你能用同样的思路同样数量的解法用Python实现么，以此为开头，给出带注释完整代码
 class Solution:
-    def letterCombinations(self, digits: str) -> List[str]:
+    def fourSum(self, nums: List[int], target: int) -> List[List[int]]:
 你能用同样的思路同样数量的解法用Java实现么，以此为开头，给出带注释完整代码
 class Solution {
-    public List<String> letterCombinations(String digits) {
+    public List<List<Integer>> fourSum(int[] nums, int target) {
 
     }
 }
 你能用同样的思路同样数量的解法用c++实现么，以此为开头，给出带注释完整代码
 class Solution {
 public:
-    vector<string> letterCombinations(string digits) {
+    vector<vector<int>> fourSum(vector<int>& nums, int target) {
 
     }
 };
@@ -113,5 +177,6 @@ public:
 git add .
 git commit -m "Updated"
 git push
-
 ```
+
+
