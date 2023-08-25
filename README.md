@@ -39,3 +39,5 @@ https://github.com/halfrost/LeetCode-Go
   - 0017.Letter-Combinations-of-a-Phone-Number
 - 2023-08-24
   - 0018.4Sum
+- 2023-08-25
+  - 0019.Remove-Nth-Node-From-End-of-List
