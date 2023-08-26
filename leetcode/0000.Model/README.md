@@ -27,17 +27,17 @@
 
 你能用同样的思路同样数量的解法用Python实现么，以此为开头，给出带注释完整代码
 class Solution:
-    def fourSum(self, nums: List[int], target: int) -> List[List[int]]:
+    def isValid(self, s: str) -> bool:
 你能用同样的思路同样数量的解法用Java实现么，以此为开头，给出带注释完整代码
 class Solution {
-    public List<List<Integer>> fourSum(int[] nums, int target) {
+    public boolean isValid(String s) {
 
     }
 }
 你能用同样的思路同样数量的解法用c++实现么，以此为开头，给出带注释完整代码
 class Solution {
 public:
-    vector<vector<int>> fourSum(vector<int>& nums, int target) {
+    bool isValid(string s) {
 
     }
 };

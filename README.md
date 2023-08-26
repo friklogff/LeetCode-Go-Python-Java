@@ -41,3 +41,5 @@ https://github.com/halfrost/LeetCode-Go
   - 0018.4Sum
 - 2023-08-25
   - 0019.Remove-Nth-Node-From-End-of-List
+- 2023-08-26
+  - 0020.Valid-Parentheses
