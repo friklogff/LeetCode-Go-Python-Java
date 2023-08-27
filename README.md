@@ -43,3 +43,5 @@ https://github.com/halfrost/LeetCode-Go
   - 0019.Remove-Nth-Node-From-End-of-List
 - 2023-08-26
   - 0020.Valid-Parentheses
+- 2023-08-27
+  - 0021.Merge-Two-Sorted-Lists
