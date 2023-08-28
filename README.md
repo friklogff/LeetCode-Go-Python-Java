@@ -45,3 +45,5 @@ https://github.com/halfrost/LeetCode-Go
   - 0020.Valid-Parentheses
 - 2023-08-27
   - 0021.Merge-Two-Sorted-Lists
+- 2023-08-28
+  - 0022.Generate-Parentheses
