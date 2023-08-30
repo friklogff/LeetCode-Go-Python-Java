@@ -47,3 +47,7 @@ https://github.com/halfrost/LeetCode-Go
   - 0021.Merge-Two-Sorted-Lists
 - 2023-08-28
   - 0022.Generate-Parentheses
+- 2023-08-29
+  - 0023.Merge-k-Sorted-Lists
+- 2023-08-30
+  - 0024.Swap-Nodes-in-Pairs

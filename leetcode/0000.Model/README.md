@@ -26,53 +26,25 @@
  *     Next *ListNode
  * }
  */
-func mergeKLists(lists []*ListNode) *ListNode {
-
-	len := len(lists)
-
-	switch len {
-	case 0:
-		return nil
-	case 1:
-		return lists[0]
-	default:
-		mid := len / 2
-		left := mergeKLists(lists[:mid])
-		right := mergeKLists(lists[mid:])
-		return merge(left, right)
-	}
+func swapPairs(head *ListNode) *ListNode {
+    if head == nil || head.Next == nil {
+        return head
+    }
+    dummy := &ListNode{}
+    pre := dummy
+    for head != nil && head.Next != nil  {
+        next := head.Next.Next
+        head.Next.Next = head
+        if dummy.Next == nil {
+            dummy.Next = head.Next
+        }
+        pre.Next = head.Next
+        head.Next = next
+        pre = head
+        head = head.Next
+    }
+    return dummy.Next
 }
-
-func merge(list1 *ListNode, list2 *ListNode) *ListNode {
-	dummy := &ListNode{}
-	cur := dummy
-
-	for list1 != nil && list2 != nil {
-		if list1.Val < list2.Val {
-			cur.Next = list1
-			list1 = list1.Next
-		} else {
-			cur.Next = list2
-			list2 = list2.Next
-		}
-		cur = cur.Next
-	}
-
-	for list1 != nil {
-		cur.Next = list1
-		list1 = list1.Next
-		cur = cur.Next
-	}
-
-	for list2 != nil {
-		cur.Next = list2
-		list2 = list2.Next
-		cur = cur.Next
-	}
-
-	return dummy.Next
-}
-
 给出完善后带注释完整代码
 
 给出测试输出语句
@@ -84,7 +56,8 @@ func merge(list1 *ListNode, list2 *ListNode) *ListNode {
 #         self.val = val
 #         self.next = next
 class Solution:
-    def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
+    def swapPairs(self, head: Optional[ListNode]) -> Optional[ListNode]:
+    
 你能用同样的思路同样数量的解法用Java实现么，以此为开头，给出带注释完整代码
 /**
  * Definition for singly-linked list.
@@ -97,7 +70,7 @@ class Solution:
  * }
  */
 class Solution {
-    public ListNode mergeKLists(ListNode[] lists) {
+    public ListNode swapPairs(ListNode head) {
 
     }
 }
@@ -114,7 +87,7 @@ class Solution {
  */
 class Solution {
 public:
-    ListNode* mergeKLists(vector<ListNode*>& lists) {
+    ListNode* swapPairs(ListNode* head) {
 
     }
 };
