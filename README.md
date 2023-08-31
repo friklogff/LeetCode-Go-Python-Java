@@ -51,3 +51,5 @@ https://github.com/halfrost/LeetCode-Go
   - 0023.Merge-k-Sorted-Lists
 - 2023-08-30
   - 0024.Swap-Nodes-in-Pairs
+- 2023-08-31
+  - 0025.Reverse-Nodes-in-k-Group
