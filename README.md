@@ -53,3 +53,5 @@ https://github.com/halfrost/LeetCode-Go
   - 0024.Swap-Nodes-in-Pairs
 - 2023-08-31
   - 0025.Reverse-Nodes-in-k-Group
+- 2023-09-01
+  - 0026.Remove-Duplicates-from-Sorted-Array
