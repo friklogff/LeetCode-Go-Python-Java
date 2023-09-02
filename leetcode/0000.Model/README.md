@@ -19,7 +19,18 @@
 ## Prompt
 ```Prompt
 我们用中文交流，你能理解这段代码么，逐行加上注释
-
+func removeElement(nums []int, val int) int {
+    left, right := 0, len(nums)
+    for left < right {
+        if nums[left] == val {
+            nums[left] = nums[right - 1]
+            right --
+        } else {
+            left ++
+        }
+    }
+    return left
+}
 
 给出完善后带注释完整代码
 
@@ -27,17 +38,17 @@
 
 你能用同样的思路同样数量的解法用Python实现么，以此为开头，给出带注释完整代码
 class Solution:
-    def removeDuplicates(self, nums: List[int]) -> int:
+    def removeElement(self, nums: List[int], val: int) -> int:
 你能用同样的思路同样数量的解法用Java实现么，以此为开头，给出带注释完整代码
 class Solution {
-    public int removeDuplicates(int[] nums) {
+    public int removeElement(int[] nums, int val) {
 
     }
 }
 你能用同样的思路同样数量的解法用c++实现么，以此为开头，给出带注释完整代码
 class Solution {
 public:
-    int removeDuplicates(vector<int>& nums) {
+    int removeElement(vector<int>& nums, int val) {
 
     }
 };

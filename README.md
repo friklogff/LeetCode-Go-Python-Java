@@ -55,3 +55,5 @@ https://github.com/halfrost/LeetCode-Go
   - 0025.Reverse-Nodes-in-k-Group
 - 2023-09-01
   - 0026.Remove-Duplicates-from-Sorted-Array
+- 2023-09-02
+  - 0027.Remove-Element
