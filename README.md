@@ -57,3 +57,5 @@ https://github.com/halfrost/LeetCode-Go
   - 0026.Remove-Duplicates-from-Sorted-Array
 - 2023-09-02
   - 0027.Remove-Element
+- 2023-09-03
+  - 0028.Find-the-Index-of-the-First-Occurrence-in-a-String
