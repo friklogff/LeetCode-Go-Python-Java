@@ -61,3 +61,5 @@ https://github.com/halfrost/LeetCode-Go
   - 0028.Find-the-Index-of-the-First-Occurrence-in-a-String
 - 2023-09-04
   - 0029.Divide-Two-Integers
+- 2023-09-05
+  - 0030.Substring-with-Concatenation-of-All-Words
