@@ -28,56 +28,58 @@
 
 ```Prompt
 我们用中文交流，你能理解这段代码么，逐行加上注释
-func findSubstring(s string, words []string) (ans []int) {
-	ls, m, n := len(s), len(words), len(words[0])
-	for i := 0; i < n && i+m*n <= ls; i++ {
-		differ := map[string]int{}
-		for j := 0; j < m; j++ {
-			differ[s[i+j*n:i+(j+1)*n]]++
-		}
-		for _, word := range words {
-			differ[word]--
-			if differ[word] == 0 {
-				delete(differ, word)
-			}
-		}
-		for start := i; start < ls-m*n+1; start += n {
-			if start != i {
-				word := s[start+(m-1)*n : start+m*n]
-				differ[word]++
-				if differ[word] == 0 {
-					delete(differ, word)
-				}
-				word = s[start-n : start]
-				differ[word]--
-				if differ[word] == 0 {
-					delete(differ, word)
-				}
-			}
-			if len(differ) == 0 {
-				ans = append(ans, start)
-			}
+// 解法一
+func nextPermutation(nums []int) {
+	i, j := 0, 0
+	for i = len(nums) - 2; i >= 0; i-- {
+		if nums[i] < nums[i+1] {
+			break
 		}
 	}
-	return
+	if i >= 0 {
+		for j = len(nums) - 1; j > i; j-- {
+			if nums[j] > nums[i] {
+				break
+			}
+		}
+		swap(&nums, i, j)
+	}
+	reverse(&nums, i+1, len(nums)-1)
 }
+
+func reverse(nums *[]int, i, j int) {
+	for i < j {
+		swap(nums, i, j)
+		i++
+		j--
+	}
+}
+
+func swap(nums *[]int, i, j int) {
+	(*nums)[i], (*nums)[j] = (*nums)[j], (*nums)[i]
+}
+
+
 给出完善后带注释完整代码
 
 给出测试输出语句
 
 你能用同样的思路同样数量的解法用Python实现么，以此为开头，给出带注释完整代码
 class Solution:
-    def findSubstring(self, s: str, words: List[str]) -> List[int]:
+    def nextPermutation(self, nums: List[int]) -> None:
+        """
+        Do not return anything, modify nums in-place instead.
+        """
 你能用同样的思路同样数量的解法用Java实现么，以此为开头，给出带注释完整代码
 class Solution {
-    public List<Integer> findSubstring(String s, String[] words) {
+    public void nextPermutation(int[] nums) {
 
     }
 }
 你能用同样的思路同样数量的解法用c++实现么，以此为开头，给出带注释完整代码
 class Solution {
 public:
-    vector<int> findSubstring(string s, vector<string>& words) {
+    void nextPermutation(vector<int>& nums) {
 
     }
 };

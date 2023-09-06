@@ -63,3 +63,5 @@ https://github.com/halfrost/LeetCode-Go
   - 0029.Divide-Two-Integers
 - 2023-09-05
   - 0030.Substring-with-Concatenation-of-All-Words
+- 2023-09-06
+  - 0031.Next-Permutation
