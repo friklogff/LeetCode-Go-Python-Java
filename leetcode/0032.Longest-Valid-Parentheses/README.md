@@ -1,9 +1,9 @@
 # [32. Longest Valid Parentheses](https://leetcode.com/problems/longest-valid-parentheses/)
 
-
 ## 题目
 
-Given a string containing just the characters `'('` and `')'`, find the length of the longest valid (well-formed) parentheses substring.
+Given a string containing just the characters`'('`and`')'`, find the length of the longest valid (well-formed)
+parentheses substring.
 
 **Example 1:**
 
@@ -31,7 +31,7 @@ Output: 0
 **Constraints:**
 
 - `0 <= s.length <= 3 * 104`
-- `s[i]` is `'('`, or `')'`.
+- `s[i]`is`'('`, or`')'`.
 
 ## 题目大意
 
@@ -39,70 +39,316 @@ Output: 0
 
 ## 解题思路
 
-- 提到括号匹配，第一时间能让人想到的就是利用栈。这里需要计算嵌套括号的总长度，所以栈里面不能单纯的存左括号，而应该存左括号在原字符串的下标，这样通过下标相减可以获取长度。那么栈如果是非空，栈底永远存的是当前遍历过的字符串中**上一个没有被匹配的右括号的下标**。**上一个没有被匹配的右括号的下标**可以理解为每段括号匹配之间的“隔板”。例如，`())((()))`，第三个右括号，即为左右 2 段正确的括号匹配中间的“隔板”。“隔板”的存在影响计算最长括号长度。如果不存在“隔板”，前后 2 段正确的括号匹配应该“融合”在一起，最长长度为 `2 + 6 = 8`，但是这里存在了“隔板”，所以最长长度仅为 `6`。
-- 具体算法实现，遇到每个 `'('` ，将它的下标压入栈中。对于遇到的每个 `')'`，先弹出栈顶元素表示匹配了当前右括号。如果栈为空，说明当前的右括号为没有被匹配的右括号，于是将其下标放入栈中来更新**上一个没有被匹配的右括号的下标**。如果栈不为空，当前右括号的下标减去栈顶元素即为以该右括号为结尾的最长有效括号的长度。需要注意初始化时，不存在**上一个没有被匹配的右括号的下标**，那么将 `-1` 放入栈中，充当下标为 `0` 的“隔板”。时间复杂度 O(n)，空间复杂度 O(n)。
-- 在栈的方法中，实际用到的元素仅仅是栈底的**上一个没有被匹配的右括号的下标**。那么考虑能否把这个值存在一个变量中，这样可以省去栈 O(n) 的时间复杂度。利用两个计数器 left 和 right 。首先，从左到右遍历字符串，每当遇到 `'('`，增加 left 计数器，每当遇到 `')'` ，增加 right 计数器。每当 left 计数器与 right 计数器相等时，计算当前有效字符串的长度，并且记录目前为止找到的最长子字符串。当 right 计数器比 left 计数器大时，说明括号不匹配，于是将 left 和 right 计数器同时变回 0。这样的做法利用了贪心的思想，考虑了以当前字符下标结尾的有效括号长度，每次当右括号数量多于左括号数量的时候之前的字符就扔掉不再考虑，重新从下一个字符开始计算。
-- 但上面的做法会漏掉一种情况，就是遍历的时候左括号的数量始终大于右括号的数量，即 `(()` ，这种时候最长有效括号是求不出来的。解决办法是反向再计算一遍，如果从右往左计算，`(()` 先计算匹配的括号，最后只剩下 `'('`，这样依旧可以算出最长匹配的括号长度。反过来计算的方法和上述从左往右计算的方法一致：当 left 计数器比 right 计数器大时，将 left 和 right 计数器同时变回 0；当 left 计数器与 right 计数器相等时，计算当前有效字符串的长度，并且记录目前为止找到的最长子字符串。这种方法的时间复杂度是 O(n)，空间复杂度 O(1)。
+以下是每个版本的解题思路的详细介绍：
+
+Go 版本解题思路：
+
+Go 版本的解题思路是利用栈来处理括号匹配问题，并采用了双指针的方法来计算最长有效括号子串的长度。主要步骤如下：
+
+1. 定义一个辅助函数 `max(a, b int) int` 用于返回两个整数中的较大值。
+
+2. 初始化 `left`、`right` 和 `maxLength` 变量，它们分别用于记录左括号数量、右括号数量和最长有效括号子串的长度，初始值都为 0。
+
+3. 遍历输入字符串 `s`，从左到右：
+   - 如果当前字符是 '(', 则增加 `left` 计数器。
+   - 如果当前字符是 ')', 则增加 `right` 计数器。
+   - 如果 `left` 和 `right` 计数器相等，说明找到了一个有效的括号子串，计算当前有效括号子串的长度，并更新 `maxLength`。
+   - 如果 `right` 大于 `left`，则重置 `left` 和 `right` 计数器为 0，因为当前的括号串无法匹配。
+
+4. 重置 `left`、`right` 和 `maxLength` 变量为 0，再进行一次从右到左的遍历，处理右括号数量多于左括号数量的情况。
+
+5. 返回 `maxLength`，它表示最长有效括号子串的长度。
+
+Python 版本解题思路：
+
+Python 版本的解题思路与 Go 版本相似，也是利用栈来处理括号匹配问题，并采用了双指针的方法来计算最长有效括号子串的长度。主要步骤如下：
+
+1. 定义一个辅助函数 `max(a, b)` 用于返回两个数中的较大值。
+
+2. 初始化 `left`、`right` 和 `maxLength` 变量，它们分别用于记录左括号数量、右括号数量和最长有效括号子串的长度，初始值都为 0。
+
+3. 遍历输入字符串 `s`，从左到右：
+   - 如果当前字符是 '(', 则增加 `left` 计数器。
+   - 如果当前字符是 ')', 则增加 `right` 计数器。
+   - 如果 `left` 和 `right` 计数器相等，说明找到了一个有效的括号子串，计算当前有效括号子串的长度，并更新 `maxLength`。
+   - 如果 `right` 大于 `left`，则重置 `left` 和 `right` 计数器为 0，因为当前的括号串无法匹配。
+
+4. 重置 `left`、`right` 和 `maxLength` 变量为 0，再进行一次从右到左的遍历，处理右括号数量多于左括号数量的情况。
+
+5. 返回 `maxLength`，它表示最长有效括号子串的长度。
+
+Java 版本解题思路：
+
+Java 版本的解题思路与 Go 和 Python 版本相似，也是利用栈来处理括号匹配问题，并采用了双指针的方法来计算最长有效括号子串的长度。主要步骤如下：
+
+1. 初始化 `left`、`right` 和 `maxLength` 变量，它们分别用于记录左括号数量、右括号数量和最长有效括号子串的长度，初始值都为 0。
+
+2. 遍历输入字符串 `s`，从左到右：
+   - 如果当前字符是 '(', 则增加 `left` 计数器。
+   - 如果当前字符是 ')', 则增加 `right` 计数器。
+   - 如果 `left` 和 `right` 计数器相等，说明找到了一个有效的括号子串，计算当前有效括号子串的长度，并更新 `maxLength`。
+   - 如果 `right` 大于 `left`，则重置 `left` 和 `right` 计数器为 0，因为当前的括号串无法匹配。
+
+3. 重置 `left`、`right` 和 `maxLength` 变量为 0，再进行一次从右到左的遍历，处理右括号数量多于左括号数量的情况。
+
+4. 返回 `maxLength`，它表示最长有效括号子串的长度。
+
+C++ 版本解题思路：
+
+C++ 版本的解题思路与 Go、Python 和 Java 版本相似，也是利用栈来处理括号匹配问题，并采用了双指针的方法来计算最长有效括号子串的长度。主要步骤如下：
+
+1. 初始化 `left`、`right` 和 `maxLength` 变量，它们分别用于记录左括号数量、右括号数量和最长有效括号子串的长度，初始值都为 0。
+
+2. 遍历输入字符串 `s`，从左到右：
+   - 如果当前字符是 '(', 则增加 `left` 计数器。
+   - 如果当前字符是 ')', 则增加 `right` 计数器。
+   - 如果 `left` 和 `right` 计数器相等，说明找到了一个有效的括号子串，计算当前有效括号子串的长度，并更新 `maxLength`。
+   - 如果 `right` 大于 `left`，则重置 `left` 和 `right` 计数器为 0，因为当前的括号串无法匹配。
+
+3. 重置 `left`、`right` 和 `maxLength` 变量为 0，再进行一次从右到左的遍历，处理右括号数量多于左括号数量的情况。
+
+4. 返回 `maxLength`，它表示最长有效括号子串的长度。
 
 ## 代码
 
-```go
-package leetcode
+## Go
 
-// 解法一 栈
-func longestValidParentheses(s string) int {
-	stack, res := []int{}, 0
-	stack = append(stack, -1)
-	for i := 0; i < len(s); i++ {
-		if s[i] == '(' {
-			stack = append(stack, i)
-		} else {
-			stack = stack[:len(stack)-1]
-			if len(stack) == 0 {
-				stack = append(stack, i)
-			} else {
-				res = max(res, i-stack[len(stack)-1])
-			}
-		}
-	}
-	return res
-}
-
+```Go
 func max(a, b int) int {
-	if a > b {
-		return a
-	}
-	return b
+    // 返回两个整数中的较大值
+    if a > b {
+        return a
+    }
+    return b
 }
 
 // 解法二 双指针
-func longestValidParentheses1(s string) int {
-	left, right, maxLength := 0, 0, 0
-	for i := 0; i < len(s); i++ {
-		if s[i] == '(' {
-			left++
-		} else {
-			right++
-		}
-		if left == right {
-			maxLength = max(maxLength, 2*right)
-		} else if right > left {
-			left, right = 0, 0
-		}
-	}
-	left, right = 0, 0
-	for i := len(s) - 1; i >= 0; i-- {
-		if s[i] == '(' {
-			left++
-		} else {
-			right++
-		}
-		if left == right {
-			maxLength = max(maxLength, 2*left)
-		} else if left > right {
-			left, right = 0, 0
-		}
-	}
-	return maxLength
+func longestValidParentheses(s string) int {
+    // 初始化左右指针和最大有效括号子串长度
+    left, right, maxLength := 0, 0, 0
+    for i := 0; i < len(s); i++ {
+        // 如果当前字符是左括号 '('，增加左括号计数
+        if s[i] == '(' {
+            left++
+        } else {
+            // 如果当前字符是右括号 ')'，增加右括号计数
+            right++
+        }
+        // 如果左右括号计数相等，说明找到了一个有效的括号子串
+        if left == right {
+            // 计算当前有效括号子串的长度并更新最大长度
+            maxLength = max(maxLength, 2*right)
+        } else if right > left {
+            // 如果右括号计数大于左括号计数，重置左右指针
+            left, right = 0, 0
+        }
+    }
+    // 重置左右指针
+    left, right = 0, 0
+    for i := len(s) - 1; i >= 0; i-- {
+        // 从右向左遍历字符串，处理与上面相同的逻辑
+        if s[i] == '(' {
+            left++
+        } else {
+            right++
+        }
+        if left == right {
+            maxLength = max(maxLength, 2*left)
+        } else if left > right {
+            left, right = 0, 0
+        }
+    }
+    // 返回最大有效括号子串的长度
+    return maxLength
 }
+
 ```
+
+## Python
+
+```Python
+class Solution:
+    def longestValidParentheses(self, s: str) -> int:
+        def max(a, b):
+            return a if a > b else b
+
+        left, right, maxLength = 0, 0, 0
+
+        # 从左向右遍历字符串
+        for char in s:
+            if char == '(':
+                left += 1
+            else:
+                right += 1
+
+            if left == right:
+                maxLength = max(maxLength, 2 * right)
+            elif right > left:
+                left, right = 0, 0
+
+        left, right = 0, 0
+
+        # 从右向左遍历字符串
+        for i in range(len(s) - 1, -1, -1):
+            char = s[i]
+            if char == '(':
+                left += 1
+            else:
+                right += 1
+
+            if left == right:
+                maxLength = max(maxLength, 2 * left)
+            elif left > right:
+                left, right = 0, 0
+
+        return maxLength
+
+```
+
+## Java
+
+```Java
+class Solution {
+    public int longestValidParentheses(String s) {
+        int left = 0, right = 0, maxLength = 0;
+
+        // 从左向右遍历字符串
+        for (char c : s.toCharArray()) {
+            if (c == '(') {
+                left++;
+            } else {
+                right++;
+            }
+
+            if (left == right) {
+                maxLength = Math.max(maxLength, 2 * right);
+            } else if (right > left) {
+                left = 0;
+                right = 0;
+            }
+        }
+
+        left = 0;
+        right = 0;
+
+        // 从右向左遍历字符串
+        for (int i = s.length() - 1; i >= 0; i--) {
+            char c = s.charAt(i);
+            if (c == '(') {
+                left++;
+            } else {
+                right++;
+            }
+
+            if (left == right) {
+                maxLength = Math.max(maxLength, 2 * left);
+            } else if (left > right) {
+                left = 0;
+                right = 0;
+            }
+        }
+
+        return maxLength;
+    }
+}
+
+```
+
+## Cpp
+
+```Cpp
+class Solution {
+public:
+    int longestValidParentheses(string s) {
+        int left = 0, right = 0, maxLength = 0;
+
+        // 从左向右遍历字符串
+        for (char c : s) {
+            if (c == '(') {
+                left++;
+            } else {
+                right++;
+            }
+
+            if (left == right) {
+                maxLength = max(maxLength, 2 * right);
+            } else if (right > left) {
+                left = 0;
+                right = 0;
+            }
+        }
+
+        left = 0;
+        right = 0;
+
+        // 从右向左遍历字符串
+        for (int i = s.length() - 1; i >= 0; i--) {
+            char c = s[i];
+            if (c == '(') {
+                left++;
+            } else {
+                right++;
+            }
+
+            if (left == right) {
+                maxLength = max(maxLength, 2 * left);
+            } else if (left > right) {
+                left = 0;
+                right = 0;
+            }
+        }
+
+        return maxLength;
+    }
+};
+
+```
+
+
+Go 版本：
+
+1. **Go 语言基础**：
+   - 变量声明和初始化
+   - 循环（for 循环）
+   - 条件语句（if-else）
+   - 函数声明和调用
+   - 数组和切片（slices）的基本操作
+
+2. **栈的概念**：
+   - Go 中可以使用切片（slices）来模拟栈的行为
+
+Python 版本：
+
+1. **Python 语言基础**：
+   - 变量声明和初始化
+   - 循环（for 循环）
+   - 条件语句（if-else）
+   - 函数声明和调用
+   - 字符串的基本操作
+
+2. **栈的概念**：
+   - Python 中可以使用列表（list）来模拟栈的行为
+
+Java 版本：
+
+1. **Java 语言基础**：
+   - 类和对象的概念
+   - 方法声明和调用
+   - 循环（for 循环）
+   - 条件语句（if-else）
+   - 字符串的基本操作
+
+2. **栈的概念**：
+   - Java 中可以使用集合类（如 ArrayList 或 LinkedList）来模拟栈的行为
+
+C++ 版本：
+
+1. **C++ 语言基础**：
+   - 变量声明和初始化
+   - 函数声明和调用
+   - 循环（for 循环）
+   - 条件语句（if-else）
+   - 字符串的基本操作
+
+2. **栈的概念**：
+   - C++ 中可以使用标准库中的容器（如 std::vector 或 std::deque）来模拟栈的行为

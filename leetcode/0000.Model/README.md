@@ -28,58 +28,60 @@
 
 ```Prompt
 我们用中文交流，你能理解这段代码么，逐行加上注释
-// 解法一
-func nextPermutation(nums []int) {
-	i, j := 0, 0
-	for i = len(nums) - 2; i >= 0; i-- {
-		if nums[i] < nums[i+1] {
-			break
+func max(a, b int) int {
+	if a > b {
+		return a
+	}
+	return b
+}
+
+// 解法二 双指针
+func longestValidParentheses(s string) int {
+	left, right, maxLength := 0, 0, 0
+	for i := 0; i < len(s); i++ {
+		if s[i] == '(' {
+			left++
+		} else {
+			right++
+		}
+		if left == right {
+			maxLength = max(maxLength, 2*right)
+		} else if right > left {
+			left, right = 0, 0
 		}
 	}
-	if i >= 0 {
-		for j = len(nums) - 1; j > i; j-- {
-			if nums[j] > nums[i] {
-				break
-			}
+	left, right = 0, 0
+	for i := len(s) - 1; i >= 0; i-- {
+		if s[i] == '(' {
+			left++
+		} else {
+			right++
 		}
-		swap(&nums, i, j)
+		if left == right {
+			maxLength = max(maxLength, 2*left)
+		} else if left > right {
+			left, right = 0, 0
+		}
 	}
-	reverse(&nums, i+1, len(nums)-1)
+	return maxLength
 }
-
-func reverse(nums *[]int, i, j int) {
-	for i < j {
-		swap(nums, i, j)
-		i++
-		j--
-	}
-}
-
-func swap(nums *[]int, i, j int) {
-	(*nums)[i], (*nums)[j] = (*nums)[j], (*nums)[i]
-}
-
-
 给出完善后带注释完整代码
 
 给出测试输出语句
 
 你能用同样的思路同样数量的解法用Python实现么，以此为开头，给出带注释完整代码
 class Solution:
-    def nextPermutation(self, nums: List[int]) -> None:
-        """
-        Do not return anything, modify nums in-place instead.
-        """
+    def longestValidParentheses(self, s: str) -> int:
 你能用同样的思路同样数量的解法用Java实现么，以此为开头，给出带注释完整代码
 class Solution {
-    public void nextPermutation(int[] nums) {
+    public int longestValidParentheses(String s) {
 
     }
 }
 你能用同样的思路同样数量的解法用c++实现么，以此为开头，给出带注释完整代码
 class Solution {
 public:
-    void nextPermutation(vector<int>& nums) {
+    int longestValidParentheses(string s) {
 
     }
 };
