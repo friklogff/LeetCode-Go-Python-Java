@@ -67,3 +67,5 @@ https://github.com/halfrost/LeetCode-Go
   - 0031.Next-Permutation
 - 2023-09-07
   - 0032.Longest-Valid-Parentheses
+- 2023-09-08
+  - 0033.Search-in-Rotated-Sorted-Array
