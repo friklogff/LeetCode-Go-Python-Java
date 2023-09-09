@@ -69,3 +69,5 @@ https://github.com/halfrost/LeetCode-Go
   - 0032.Longest-Valid-Parentheses
 - 2023-09-08
   - 0033.Search-in-Rotated-Sorted-Array
+- 2023-09-09
+  - 0034.Find-First-and-Last-Position-of-Element-in-Sorted-Array

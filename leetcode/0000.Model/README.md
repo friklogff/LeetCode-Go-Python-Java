@@ -28,37 +28,31 @@
 
 ```Prompt
 我们用中文交流，你能理解这段代码么，逐行加上注释
-func search33(nums []int, target int) int {
-	if len(nums) == 0 {
-		return -1
-	}
-	low, high := 0, len(nums)-1
-	for low <= high {
-		mid := low + (high-low)>>1
-		if nums[mid] == target {
-			return mid
-		} else if nums[mid] > nums[low] { // 在数值大的一部分区间里
-			if nums[low] <= target && target < nums[mid] {
-				high = mid - 1
-			} else {
-				low = mid + 1
-			}
-		} else if nums[mid] < nums[high] { // 在数值小的一部分区间里
-			if nums[mid] < target && target <= nums[high] {
-				low = mid + 1
-			} else {
-				high = mid - 1
-			}
-		} else {
-			if nums[low] == nums[mid] {
-				low++
-			}
-			if nums[high] == nums[mid] {
-				high--
-			}
-		}
-	}
-	return -1
+func searchRange(nums []int, target int) []int {
+    n := len(nums)
+    l_prt := 0
+    r_prt := n - 1
+    
+    ans := []int{-1, -1}  
+    for l_prt <= r_prt{
+        mid := ((r_prt - l_prt)>>1) + l_prt
+        if nums[mid]==target{
+            ans[0] = mid
+            ans[1] = mid
+            for ans[0] > 0 && nums[ans[0]-1] == target{
+                ans[0]--
+            }
+            for ans[1] < n - 1 && nums[ans[1] + 1] ==target{
+                ans[1]++
+            }
+            break
+        }else if nums[mid] > target{
+            r_prt = mid - 1
+        }else{
+            l_prt = mid + 1
+        }
+    }
+    return ans
 }
 
 给出完善后带注释完整代码
@@ -67,17 +61,17 @@ func search33(nums []int, target int) int {
 
 你能用同样的思路同样数量的解法用Python实现么，以此为开头，给出带注释完整代码
 class Solution:
-    def search(self, nums: List[int], target: int) -> int:
+    def searchRange(self, nums: List[int], target: int) -> List[int]:
 你能用同样的思路同样数量的解法用Java实现么，以此为开头，给出带注释完整代码
 class Solution {
-    public int search(int[] nums, int target) {
+    public int[] searchRange(int[] nums, int target) {
 
     }
 }
 你能用同样的思路同样数量的解法用c++实现么，以此为开头，给出带注释完整代码
 class Solution {
 public:
-    int search(vector<int>& nums, int target) {
+    vector<int> searchRange(vector<int>& nums, int target) {
 
     }
 };
