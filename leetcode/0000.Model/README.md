@@ -29,21 +29,30 @@
 ```Prompt
 我们用中文交流，你能理解这段代码么，逐行加上注释
 
-func searchInsert(nums []int, target int) int {
-	low, high := 0, len(nums)-1
-	for low <= high {
-		mid := low + (high-low)>>1
-		if nums[mid] >= target {
-			high = mid - 1
-		} else {
-			if (mid == len(nums)-1) || (nums[mid+1] >= target) {
-				return mid + 1
+func isValidSudoku1(board [][]byte) bool {
+	rowbuf, colbuf, boxbuf := make([][]bool, 9), make([][]bool, 9), make([][]bool, 9)
+	for i := 0; i < 9; i++ {
+		rowbuf[i] = make([]bool, 9)
+		colbuf[i] = make([]bool, 9)
+		boxbuf[i] = make([]bool, 9)
+	}
+	// 遍历一次，添加缓存
+	for r := 0; r < 9; r++ {
+		for c := 0; c < 9; c++ {
+			if board[r][c] != '.' {
+				num := board[r][c] - '0' - byte(1)
+				if rowbuf[r][num] || colbuf[c][num] || boxbuf[r/3*3+c/3][num] {
+					return false
+				}
+				rowbuf[r][num] = true
+				colbuf[c][num] = true
+				boxbuf[r/3*3+c/3][num] = true // r,c 转换到box方格中
 			}
-			low = mid + 1
 		}
 	}
-	return 0
+	return true
 }
+
 
 
 给出完善后带注释完整代码
@@ -52,17 +61,17 @@ func searchInsert(nums []int, target int) int {
 
 你能用同样的思路同样数量的解法用Python实现么，以此为开头，给出带注释完整代码
 class Solution:
-    def searchInsert(self, nums: List[int], target: int) -> int:
+    def isValidSudoku(self, board: List[List[str]]) -> bool:
 你能用同样的思路同样数量的解法用Java实现么，以此为开头，给出带注释完整代码
 class Solution {
-    public int searchInsert(int[] nums, int target) {
+    public boolean isValidSudoku(char[][] board) {
 
     }
 }
 你能用同样的思路同样数量的解法用c++实现么，以此为开头，给出带注释完整代码
 class Solution {
 public:
-    int searchInsert(vector<int>& nums, int target) {
+    bool isValidSudoku(vector<vector<char>>& board) {
 
     }
 };

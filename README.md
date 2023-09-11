@@ -73,3 +73,5 @@ https://github.com/halfrost/LeetCode-Go
   - 0034.Find-First-and-Last-Position-of-Element-in-Sorted-Array
 - 2023-09-10
   - 0035.Search-Insert-Position
+- 2023-09-11
+  - 0036.Valid-Sudoku
