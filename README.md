@@ -75,3 +75,5 @@ https://github.com/halfrost/LeetCode-Go
   - 0035.Search-Insert-Position
 - 2023-09-11
   - 0036.Valid-Sudoku
+- 2023-09-12
+  - 0037.Sudoku-Solver
