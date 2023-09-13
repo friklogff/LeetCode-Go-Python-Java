@@ -77,3 +77,5 @@ https://github.com/halfrost/LeetCode-Go
   - 0036.Valid-Sudoku
 - 2023-09-12
   - 0037.Sudoku-Solver
+- 2023-09-13
+  - 0037.Sudoku-Solver
