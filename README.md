@@ -78,4 +78,6 @@ https://github.com/halfrost/LeetCode-Go
 - 2023-09-12
   - 0037.Sudoku-Solver
 - 2023-09-13
-  - 0037.Sudoku-Solver
+  - 0038.Count-And-Say
+- 2023-09-14
+  - 0039.Combination-Sum

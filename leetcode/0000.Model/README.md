@@ -28,40 +28,34 @@
 
 ```Prompt
 我们用中文交流，你能理解这段代码么，逐行加上注释
-class Solution {
- public String justify(String s){
-        StringBuilder result=new StringBuilder();
-        for(int i=0;i<s.length();i++){
-            char c =s.charAt(i);
-            int sum=1;
-            if(i+1>=s.length()){
-                result.append(sum);
-                result.append(c);
-                return String.valueOf(result);
-            }
-            while (c==s.charAt(i+1)){
-                sum++;
-                i++;
-                if(i+1>=s.length()){
-                    result.append(sum);
-                    result.append(c);
-                    return String.valueOf(result);
-                }
-            }
-            result.append(sum);
-            result.append(c);
+func combinationSum(candidates []int, target int) [][]int {
+    ret := [][]int{}
+    vals := []int{}
+    var backtraking func(candidates []int, start, sum int)
+
+    sort.Ints(candidates)
+
+    backtraking = func(candidates []int, start, sum int) {
+        if sum == 0 {
+            tmp := make([]int, len(vals))
+            copy(tmp, vals)
+            ret = append(ret, tmp)
+            return
         }
-        return String.valueOf(result);
-    }
-    public String countAndSay(int n) {
-        String[] list=new String[n];
-        list[0]="1";
-        for(int i=1;i<n;i++){
-            String s=list[i-1];
-            list[i]=justify(s);
+
+        for i := start; i < len(candidates); i++ {
+            if candidates[i] > sum {
+                break
+            }
+            vals = append(vals, candidates[i])
+            backtraking(candidates, i, sum-candidates[i])
+            vals = vals[:len(vals)-1]
         }
-        return list[n-1];
     }
+
+    backtraking(candidates, 0, target)
+
+    return ret
 }
 
 
@@ -73,17 +67,17 @@ class Solution {
 
 你能用同样的思路同样数量的解法用Java实现么，以此为开头，给出带注释完整代码
 class Solution {
-    public void solveSudoku(char[][] board) {
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
 
     }
 }你能用同样的思路同样数量的解法用Python实现么，以此为开头，给出带注释完整代码
 class Solution:
-    def countAndSay(self, n: int) -> str:
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
 你能用同样的思路同样数量的解法用c++实现么，以此为开头，给出带注释完整代码
 class Solution {
 public:
-    string countAndSay(int n) {
-
+    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+        
     }
 };
 你能用同样的思路同样数量的解法用go实现么，以此为开头，给出带注释完整代码
