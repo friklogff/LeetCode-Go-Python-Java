@@ -83,5 +83,7 @@ https://github.com/halfrost/LeetCode-Go
   - 0039.Combination-Sum
 - 2023-09-15
   - 0040.Combination-Sum-II
-- 2023-09-15
+- 2023-09-16
   - 0041.First-Missing-Positive
+- 2023-09-17
+  - 0042.Trapping-Rain-Water

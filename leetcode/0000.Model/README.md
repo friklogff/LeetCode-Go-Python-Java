@@ -28,19 +28,27 @@
 
 ```Prompt
 我们用中文交流，你能理解这段代码么，逐行加上注释
-func firstMissingPositive(nums []int) int {
-	numMap := make(map[int]int, len(nums))
-	for _, v := range nums {
-		numMap[v] = v
-	}
-	for index := 1; index < len(nums)+1; index++ {
-		if _, ok := numMap[index]; !ok {
-			return index
+func trap(height []int) int {
+	res, left, right, maxLeft, maxRight := 0, 0, len(height)-1, 0, 0
+	for left <= right {
+		if height[left] <= height[right] {
+			if height[left] > maxLeft {
+				maxLeft = height[left]
+			} else {
+				res += maxLeft - height[left]
+			}
+			left++
+		} else {
+			if height[right] >= maxRight {
+				maxRight = height[right]
+			} else {
+				res += maxRight - height[right]
+			}
+			right--
 		}
 	}
-	return len(nums) + 1
+	return res
 }
-
 
 给出完善后带注释完整代码
 
@@ -49,17 +57,17 @@ func firstMissingPositive(nums []int) int {
 
 你能用同样的思路同样数量的解法用Java实现么，以此为开头，给出带注释完整代码
 class Solution {
-    public int firstMissingPositive(int[] nums) {
+    public int trap(int[] height) {
 
     }
 }
 你能用同样的思路同样数量的解法用Python实现么，以此为开头，给出带注释完整代码
 class Solution:
-    def firstMissingPositive(self, nums: List[int]) -> int:
+    def trap(self, height: List[int]) -> int:
 你能用同样的思路同样数量的解法用c++实现么，以此为开头，给出带注释完整代码
 class Solution {
 public:
-    int firstMissingPositive(vector<int>& nums) {
+    int trap(vector<int>& height) {
 
     }
 };
