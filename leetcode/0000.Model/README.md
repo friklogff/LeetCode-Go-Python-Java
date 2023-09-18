@@ -28,26 +28,28 @@
 
 ```Prompt
 我们用中文交流，你能理解这段代码么，逐行加上注释
-func trap(height []int) int {
-	res, left, right, maxLeft, maxRight := 0, 0, len(height)-1, 0, 0
-	for left <= right {
-		if height[left] <= height[right] {
-			if height[left] > maxLeft {
-				maxLeft = height[left]
-			} else {
-				res += maxLeft - height[left]
-			}
-			left++
-		} else {
-			if height[right] >= maxRight {
-				maxRight = height[right]
-			} else {
-				res += maxRight - height[right]
-			}
-			right--
+func multiply(num1 string, num2 string) string {
+	if num1 == "0" || num2 == "0" {
+		return "0"
+	}
+	b1, b2, tmp := []byte(num1), []byte(num2), make([]int, len(num1)+len(num2))
+	for i := 0; i < len(b1); i++ {
+		for j := 0; j < len(b2); j++ {
+			tmp[i+j+1] += int(b1[i]-'0') * int(b2[j]-'0')
 		}
 	}
-	return res
+	for i := len(tmp) - 1; i > 0; i-- {
+		tmp[i-1] += tmp[i] / 10
+		tmp[i] = tmp[i] % 10
+	}
+	if tmp[0] == 0 {
+		tmp = tmp[1:]
+	}
+	res := make([]byte, len(tmp))
+	for i := 0; i < len(tmp); i++ {
+		res[i] = '0' + byte(tmp[i])
+	}
+	return string(res)
 }
 
 给出完善后带注释完整代码
@@ -57,17 +59,17 @@ func trap(height []int) int {
 
 你能用同样的思路同样数量的解法用Java实现么，以此为开头，给出带注释完整代码
 class Solution {
-    public int trap(int[] height) {
+    public String multiply(String num1, String num2) {
 
     }
 }
 你能用同样的思路同样数量的解法用Python实现么，以此为开头，给出带注释完整代码
 class Solution:
-    def trap(self, height: List[int]) -> int:
+    def multiply(self, num1: str, num2: str) -> str:
 你能用同样的思路同样数量的解法用c++实现么，以此为开头，给出带注释完整代码
 class Solution {
 public:
-    int trap(vector<int>& height) {
+    string multiply(string num1, string num2) {
 
     }
 };
