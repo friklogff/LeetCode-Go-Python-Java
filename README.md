@@ -87,3 +87,7 @@ https://github.com/halfrost/LeetCode-Go
   - 0041.First-Missing-Positive
 - 2023-09-17
   - 0042.Trapping-Rain-Water
+- 2023-09-18
+  - 0043.Multiply-Strings
+- 2023-09-19
+  - 0044.Wildcard Matching
