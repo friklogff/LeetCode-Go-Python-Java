@@ -91,3 +91,7 @@ https://github.com/halfrost/LeetCode-Go
   - 0043.Multiply-Strings
 - 2023-09-19
   - 0044.Wildcard Matching
+- 2023-09-20
+  - 0045.Jump-Game-II
+- 2023-09-21
+  - 0046.Permutations
