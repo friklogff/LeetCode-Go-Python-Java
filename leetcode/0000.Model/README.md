@@ -28,23 +28,27 @@
 
 ```Prompt
 我们用中文交流，你能理解这段代码么，逐行加上注释
-// 解法一
-func rotate(matrix [][]int) {
-	length := len(matrix)
-	// rotate by diagonal 对角线变换
-	for i := 0; i < length; i++ {
-		for j := i + 1; j < length; j++ {
-			matrix[i][j], matrix[j][i] = matrix[j][i], matrix[i][j]
-		}
-	}
-	// rotate by vertical centerline 竖直轴对称翻转
-	for i := 0; i < length; i++ {
-		for j := 0; j < length/2; j++ {
-			matrix[i][j], matrix[i][length-j-1] = matrix[i][length-j-1], matrix[i][j]
-		}
-	}
-}
+func groupAnagrams(strs []string) [][]string {
+    hashMap := map[string][]string{}
+    res := [][]string{}
 
+    sign := func(s string) string {
+        strB := [26]byte{}
+		for _, v := range s {
+			strB[v-'a']++
+		}
+		return string(strB[:])
+    }
+    for _, v := range strs {
+        signV := sign(v)
+        hashMap[signV] = append(hashMap[signV], v)
+    }
+
+    for _, v := range hashMap {
+        res = append(res, v)
+    }
+    return res
+}
 
 给出完善后带注释完整代码
 
@@ -53,20 +57,17 @@ func rotate(matrix [][]int) {
 
 你能用同样的思路同样数量的解法用Java实现么，以此为开头，给出带注释完整代码
 class Solution {
-    public void rotate(int[][] matrix) {
+    public List<List<String>> groupAnagrams(String[] strs) {
 
     }
 }
 你能用同样的思路同样数量的解法用Python实现么，以此为开头，给出带注释完整代码
 class Solution:
-    def rotate(self, matrix: List[List[int]]) -> None:
-        """
-        Do not return anything, modify matrix in-place instead.
-        """
+    def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
 你能用同样的思路同样数量的解法用c++实现么，以此为开头，给出带注释完整代码
 class Solution {
 public:
-    void rotate(vector<vector<int>>& matrix) {
+    vector<vector<string>> groupAnagrams(vector<string>& strs) {
 
     }
 };
@@ -86,9 +87,8 @@ func isSameTree(p *TreeNode, q *TreeNode) bool {
 
 再分别介绍每个版本的解题思路
 
-
-```
 git add .
 git commit -m "Updated"
-git push
+git push                                                                                                                                      
 
+```

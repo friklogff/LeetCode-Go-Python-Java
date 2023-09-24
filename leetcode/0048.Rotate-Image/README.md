@@ -95,21 +95,21 @@ C++ 版本的解题思路与 Java 版本非常相似：
 ```Go
 // 解法一
 func rotate(matrix [][]int) {
-	length := len(matrix) // 获取矩阵的长度
+    length := len(matrix) // 获取矩阵的长度
 
-	// rotate by diagonal 对角线变换
-	for i := 0; i < length; i++ { // 遍历行
-		for j := i + 1; j < length; j++ { // 遍历列，从当前行的下一个元素开始
-			matrix[i][j], matrix[j][i] = matrix[j][i], matrix[i][j] // 交换矩阵[i][j]和矩阵[j][i]的值，实现对角线翻转
-		}
-	}
+    // rotate by diagonal 对角线变换
+    for i := 0; i < length; i++ { // 遍历行
+        for j := i + 1; j < length; j++ { // 遍历列，从当前行的下一个元素开始
+            matrix[i][j], matrix[j][i] = matrix[j][i], matrix[i][j] // 交换矩阵[i][j]和矩阵[j][i]的值，实现对角线翻转
+        }
+    }
 
-	// rotate by vertical centerline 竖直轴对称翻转
-	for i := 0; i < length; i++ { // 遍历每一行
-		for j := 0; j < length/2; j++ { // 遍历每一行的前一半列
-			matrix[i][j], matrix[i][length-j-1] = matrix[i][length-j-1], matrix[i][j] // 交换矩阵[i][j]和矩阵[i][length-j-1]的值，实现竖直轴对称翻转
-		}
-	}
+    // rotate by vertical centerline 竖直轴对称翻转
+    for i := 0; i < length; i++ { // 遍历每一行
+        for j := 0; j < length/2; j++ { // 遍历每一行的前一半列
+            matrix[i][j], matrix[i][length-j-1] = matrix[i][length-j-1], matrix[i][j] // 交换矩阵[i][j]和矩阵[i][length-j-1]的值，实现竖直轴对称翻转
+        }
+    }
 }
 
 ```
@@ -181,7 +181,7 @@ class Solution:
 
 ```
 
- Go 版本
+Go 版本
 
 1. **Slice（切片）**：在 Go 中，切片是一种灵活的数据结构，用于处理动态数组。在这个问题中，我们使用切片来表示二维矩阵。
 
