@@ -28,28 +28,24 @@
 
 ```Prompt
 我们用中文交流，你能理解这段代码么，逐行加上注释
-func groupAnagrams(strs []string) [][]string {
-    hashMap := map[string][]string{}
-    res := [][]string{}
-
-    sign := func(s string) string {
-        strB := [26]byte{}
-		for _, v := range s {
-			strB[v-'a']++
-		}
-		return string(strB[:])
-    }
-    for _, v := range strs {
-        signV := sign(v)
-        hashMap[signV] = append(hashMap[signV], v)
-    }
-
-    for _, v := range hashMap {
-        res = append(res, v)
-    }
-    return res
+// 时间复杂度 O(log n),空间复杂度 O(1)
+func myPow(x float64, n int) float64 {
+	if n == 0 {
+		return 1
+	}
+	if n == 1 {
+		return x
+	}
+	if n < 0 {
+		n = -n
+		x = 1 / x
+	}
+	tmp := myPow(x, n/2)
+	if n%2 == 0 {
+		return tmp * tmp
+	}
+	return tmp * tmp * x
 }
-
 给出完善后带注释完整代码
 
 给出测试输出语句
@@ -57,17 +53,17 @@ func groupAnagrams(strs []string) [][]string {
 
 你能用同样的思路同样数量的解法用Java实现么，以此为开头，给出带注释完整代码
 class Solution {
-    public List<List<String>> groupAnagrams(String[] strs) {
+    public double myPow(double x, int n) {
 
     }
 }
 你能用同样的思路同样数量的解法用Python实现么，以此为开头，给出带注释完整代码
 class Solution:
-    def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
+    def myPow(self, x: float, n: int) -> float:
 你能用同样的思路同样数量的解法用c++实现么，以此为开头，给出带注释完整代码
 class Solution {
 public:
-    vector<vector<string>> groupAnagrams(vector<string>& strs) {
+    double myPow(double x, int n) {
 
     }
 };
@@ -92,3 +88,5 @@ git commit -m "Updated"
 git push                                                                                                                                      
 
 ```
+git config --global user.name "friklogff"
+git config --global user.email "374591069@qq.com"
