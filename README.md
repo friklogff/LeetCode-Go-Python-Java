@@ -101,3 +101,15 @@ https://github.com/halfrost/LeetCode-Go
   - 0048.Rotate-Image
 - 2023-09-24
   - 0049.Group-Anagrams
+- 2023-09-25
+  - 0050.Powx-n
+- 2023-09-26
+  - 0051.N-Queens
+- 2023-09-27
+  - 0052.N-Queens-II
+- 2023-09-28
+  - 0053.Maximum-Subarray
+- 2023-09-29
+  - 0054.Spiral-Matrix
+- 2023-09-30
+  - 0055.Jump-Game
