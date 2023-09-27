@@ -91,3 +91,7 @@ git push
 ```
 git config --global user.name "friklogff"
 git config --global user.email "374591069@qq.com"
+git config user.name
+git config user.email
+ssh-keygen -t rsa -C '374591069@qq.com'
+cat ~/.ssh/id_rsa.pub
