@@ -25,3 +25,121 @@ If you have figured out the O(*n*) solution, try coding another solution using t
 
 - 这一题可以用 DP 求解也可以不用 DP。
 - 题目要求输出数组中某个区间内数字之和最大的那个值。`dp[i]` 表示 `[0,i]` 区间内各个子区间和的最大值，状态转移方程是 `dp[i] = nums[i] + dp[i-1] (dp[i-1] > 0)`，`dp[i] = nums[i] (dp[i-1] ≤ 0)`。
+## 代码
+
+## Go
+
+```Go
+// 定义一个名为 maxSubArray 的函数，接受一个整数数组 nums 作为参数，返回最大子数组和。
+func maxSubArray(nums []int) int {
+    // 如果数组为空，直接返回 0。
+    if len(nums) == 0 {
+        return 0
+    }
+    // 初始化一个临时变量 tmp 和最大子数组和 m，初始值为数组的第一个元素。
+    var tmp = 0
+    var m = nums[0]
+    // 遍历整个数组。
+    for i := 0; i < len(nums); i++ {
+        // 更新临时变量 tmp，将当前元素加入其中。
+        tmp += nums[i]
+        // 更新最大子数组和 m，取当前的 m 和 tmp 的较大值。
+        m = max(m, tmp)
+        // 如果 tmp 小于 0，将 tmp 重置为 0，因为负数不会对最大子数组和产生正面影响。
+        tmp = max(tmp, 0)
+    }
+    // 返回最大子数组和 m。
+    return m
+}
+
+// 定义一个名为 max 的辅助函数，接受两个整数参数 a 和 b，返回较大的整数。
+func max(a, b int) int {
+    // 如果 a 大于 b，返回 a，否则返回 b。
+    if a > b {
+        return a
+    }
+    return b
+}
+
+```
+
+## Python
+
+```Python
+class Solution:
+    def maxSubArray(self, nums: List[int]) -> int:
+        # 如果数组为空，直接返回0。
+        if not nums:
+            return 0
+        # 初始化一个临时变量 tmp 和最大子数组和 m，初始值为数组的第一个元素。
+        tmp = 0
+        m = nums[0]
+        # 遍历整个数组。
+        for num in nums:
+            # 更新临时变量 tmp，将当前元素加入其中。
+            tmp += num
+            # 更新最大子数组和 m，取当前的 m 和 tmp 的较大值。
+            m = max(m, tmp)
+            # 如果 tmp 小于 0，将 tmp 重置为 0，因为负数不会对最大子数组和产生正面影响。
+            tmp = max(tmp, 0)
+        # 返回最大子数组和 m。
+        return m
+
+```
+
+## Java
+
+```Java
+class Solution {
+    public int maxSubArray(int[] nums) {
+        // 如果数组为空，直接返回0。
+        if (nums.length == 0) {
+            return 0;
+        }
+        // 初始化一个临时变量 tmp 和最大子数组和 m，初始值为数组的第一个元素。
+        int tmp = 0;
+        int m = nums[0];
+        // 遍历整个数组。
+        for (int i = 0; i < nums.length; i++) {
+            // 更新临时变量 tmp，将当前元素加入其中。
+            tmp += nums[i];
+            // 更新最大子数组和 m，取当前的 m 和 tmp 的较大值。
+            m = Math.max(m, tmp);
+            // 如果 tmp 小于 0，将 tmp 重置为 0，因为负数不会对最大子数组和产生正面影响。
+            tmp = Math.max(tmp, 0);
+        }
+        // 返回最大子数组和 m。
+        return m;
+    }
+}
+
+```
+
+## Cpp
+
+```Cpp
+class Solution {
+public:
+    int maxSubArray(vector<int>& nums) {
+        // 如果数组为空，直接返回0。
+        if (nums.empty()) {
+            return 0;
+        }
+        // 初始化一个临时变量 tmp 和最大子数组和 m，初始值为数组的第一个元素。
+        int tmp = 0;
+        int m = nums[0];
+        // 遍历整个数组。
+        for (int num : nums) {
+            // 更新临时变量 tmp，将当前元素加入其中。
+            tmp += num;
+            // 更新最大子数组和 m，取当前的 m 和 tmp 的较大值。
+            m = max(m, tmp);
+            // 如果 tmp 小于 0，将 tmp 重置为 0，因为负数不会对最大子数组和产生正面影响。
+            tmp = max(tmp, 0);
+        }
+        // 返回最大子数组和 m。
+        return m;
+    }
+};
+
+```
