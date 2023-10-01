@@ -28,15 +28,44 @@
 
 ```Prompt
 我们用中文交流，你能理解这段代码么，逐行加上注释
-class Solution:
-    def canJump(self, nums) :
-        max_i = 0       #初始化当前能到达最远的位置
-        for i, jump in enumerate(nums):   #i为当前位置，jump是当前位置的跳数
-            if max_i>=i and i+jump>max_i:  #如果当前位置能到达，并且当前位置+跳数>最远位置  
-                max_i = i+jump  #更新最远能到达位置
-        return max_i>=i
+class Solution {
+    static int[][] ans = new int[10001][2]; // 创建一个静态二维数组用于存储合并后的区间
+    public int[][] merge(int[][] intervals) {
+        int MAX = Integer.MIN_VALUE, MIN = Integer.MAX_VALUE, left = -1, prefix = 0;
+        for (int[] temp : intervals) {
+            int x = temp[0];
+            int y = temp[1];
+            if (x < MIN) MIN = x;
+            if (y > MAX) MAX = y;
+        }
+        int[] start = new int[MAX+1], end = new int[MAX+1];
+        
+        // 统计每个起始点和结束点出现的次数
+        for (int i = 0; i < intervals.length; i++) {
+            int x = intervals[i][0];
+            int y = intervals[i][1];
+            start[x]++;
+            end[y]++;
+        }
 
-
+        int size = 0;
+        for (int i = MIN; i <= MAX; i++) {
+            if (start[i] > 0) {
+                prefix += start[i];
+                if (prefix == start[i]) {
+                    left = i;
+                }
+            }
+            if (end[i] > 0) {
+                prefix -= end[i];
+                if (prefix == 0) {
+                    ans[size++] = new int[]{left, i}; // 找到一个合并后的区间
+                }
+            }
+        }
+        return Arrays.copyOfRange(ans, 0, size); // 返回合并后的结果数组
+    }
+}
 
 给出完善后带注释完整代码
 
@@ -44,31 +73,22 @@ class Solution:
 
 你能用同样的思路同样数量的解法用Python实现么，以此为开头，给出带注释完整代码
 class Solution:
-    def canJump(self, nums: List[int]) -> bool:
+    def merge(self, intervals: List[List[int]]) -> List[List[int]]:
 你能用同样的思路同样数量的解法用Java实现么，以此为开头，给出带注释完整代码
 class Solution {
-    public boolean canJump(int[] nums) {
+    public int[][] merge(int[][] intervals) {
 
     }
 }
-
 你能用同样的思路同样数量的解法用c++实现么，以此为开头，给出带注释完整代码
 class Solution {
 public:
-    bool canJump(vector<int>& nums) {
+    vector<vector<int>> merge(vector<vector<int>>& intervals) {
 
     }
 };
 你能用同样的思路同样数量的解法用go实现么，以此为开头，给出带注释完整代码
-/**
- * Definition for a binary tree node.
- * type TreeNode struct {
- *     Val int
- *     Left *TreeNode
- *     Right *TreeNode
- * }
- */
-func isSameTree(p *TreeNode, q *TreeNode) bool {
+func merge(intervals [][]int) [][]int {
 
 }
 我们用中文交流，分开介绍每个版本的所需要掌握的详细基础知识
