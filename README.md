@@ -113,3 +113,7 @@ https://github.com/halfrost/LeetCode-Go
   - 0054.Spiral-Matrix
 - 2023-09-30
   - 0055.Jump-Game
+- 2023-10-01
+  - 0056.Merge-Intervals
+- 2023-10-02
+  - 0057.Insert-Interval

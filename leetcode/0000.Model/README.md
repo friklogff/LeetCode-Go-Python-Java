@@ -28,69 +28,69 @@
 
 ```Prompt
 我们用中文交流，你能理解这段代码么，逐行加上注释
-class Solution {
-    static int[][] ans = new int[10001][2]; // 创建一个静态二维数组用于存储合并后的区间
-    public int[][] merge(int[][] intervals) {
-        int MAX = Integer.MIN_VALUE, MIN = Integer.MAX_VALUE, left = -1, prefix = 0;
-        for (int[] temp : intervals) {
-            int x = temp[0];
-            int y = temp[1];
-            if (x < MIN) MIN = x;
-            if (y > MAX) MAX = y;
-        }
-        int[] start = new int[MAX+1], end = new int[MAX+1];
-        
-        // 统计每个起始点和结束点出现的次数
-        for (int i = 0; i < intervals.length; i++) {
-            int x = intervals[i][0];
-            int y = intervals[i][1];
-            start[x]++;
-            end[y]++;
-        }
-
-        int size = 0;
-        for (int i = MIN; i <= MAX; i++) {
-            if (start[i] > 0) {
-                prefix += start[i];
-                if (prefix == start[i]) {
-                    left = i;
-                }
-            }
-            if (end[i] > 0) {
-                prefix -= end[i];
-                if (prefix == 0) {
-                    ans[size++] = new int[]{left, i}; // 找到一个合并后的区间
-                }
-            }
-        }
-        return Arrays.copyOfRange(ans, 0, size); // 返回合并后的结果数组
+func max(a, b int) int{
+    if a > b{
+        return a 
     }
+    return b
+}
+func insert(intervals [][]int, newInterval []int) [][]int {
+    if len(intervals) == 0{
+        return [][]int{newInterval}
+    }
+    res := [][]int{}
+    i := 0
+    for ; i < len(intervals); i++{
+        if intervals[i][0] >= newInterval[0]{
+            tmp := make([][]int, len(intervals[i:]))
+            copy(tmp, intervals[i:])
+            intervals = append(append(intervals[:i], newInterval), tmp...)
+            break
+        }
+    }
+
+    if i == len(intervals){
+        intervals = append(intervals, newInterval)
+    }
+
+    res = append(res, intervals[0])
+
+    for i:=1; i < len(intervals); i++{
+        if intervals[i][0] <= res[len(res)-1][1]{
+            res[len(res)-1][1] = max(res[len(res)-1][1], intervals[i][1])
+        }else{
+            res = append(res, intervals[i])
+        }
+    }
+
+    return res
+    
 }
 
 给出完善后带注释完整代码
 
 给出测试输出语句
+你能用同样的思路同样数量的解法用go实现么，以此为开头，给出带注释完整代码
+func insert(intervals [][]int, newInterval []int) [][]int {
 
+}
 你能用同样的思路同样数量的解法用Python实现么，以此为开头，给出带注释完整代码
 class Solution:
-    def merge(self, intervals: List[List[int]]) -> List[List[int]]:
+    def insert(self, intervals: List[List[int]], newInterval: List[int]) -> List[List[int]]:
 你能用同样的思路同样数量的解法用Java实现么，以此为开头，给出带注释完整代码
 class Solution {
-    public int[][] merge(int[][] intervals) {
+    public int[][] insert(int[][] intervals, int[] newInterval) {
 
     }
 }
 你能用同样的思路同样数量的解法用c++实现么，以此为开头，给出带注释完整代码
 class Solution {
 public:
-    vector<vector<int>> merge(vector<vector<int>>& intervals) {
+    vector<vector<int>> insert(vector<vector<int>>& intervals, vector<int>& newInterval) {
 
     }
 };
-你能用同样的思路同样数量的解法用go实现么，以此为开头，给出带注释完整代码
-func merge(intervals [][]int) [][]int {
 
-}
 我们用中文交流，分开介绍每个版本的所需要掌握的详细基础知识
 
 再分别介绍每个版本的解题思路
