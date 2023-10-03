@@ -117,3 +117,5 @@ https://github.com/halfrost/LeetCode-Go
   - 0056.Merge-Intervals
 - 2023-10-02
   - 0057.Insert-Interval
+- 2023-10-03
+  - 0057.Insert-Interval

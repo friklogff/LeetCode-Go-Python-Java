@@ -28,43 +28,19 @@
 
 ```Prompt
 我们用中文交流，你能理解这段代码么，逐行加上注释
-func max(a, b int) int{
-    if a > b{
-        return a 
-    }
-    return b
-}
-func insert(intervals [][]int, newInterval []int) [][]int {
-    if len(intervals) == 0{
-        return [][]int{newInterval}
-    }
-    res := [][]int{}
-    i := 0
-    for ; i < len(intervals); i++{
-        if intervals[i][0] >= newInterval[0]{
-            tmp := make([][]int, len(intervals[i:]))
-            copy(tmp, intervals[i:])
-            intervals = append(append(intervals[:i], newInterval), tmp...)
-            break
-        }
-    }
-
-    if i == len(intervals){
-        intervals = append(intervals, newInterval)
-    }
-
-    res = append(res, intervals[0])
-
-    for i:=1; i < len(intervals); i++{
-        if intervals[i][0] <= res[len(res)-1][1]{
-            res[len(res)-1][1] = max(res[len(res)-1][1], intervals[i][1])
-        }else{
-            res = append(res, intervals[i])
-        }
-    }
-
-    return res
-    
+func lengthOfLastWord(s string) int {
+	last := len(s) - 1
+	for last >= 0 && s[last] == ' ' {
+		last--
+	}
+	if last < 0 {
+		return 0
+	}
+	first := last
+	for first >= 0 && s[first] != ' ' {
+		first--
+	}
+	return last - first
 }
 
 给出完善后带注释完整代码
@@ -76,17 +52,17 @@ func insert(intervals [][]int, newInterval []int) [][]int {
 }
 你能用同样的思路同样数量的解法用Python实现么，以此为开头，给出带注释完整代码
 class Solution:
-    def insert(self, intervals: List[List[int]], newInterval: List[int]) -> List[List[int]]:
+    def lengthOfLastWord(self, s: str) -> int:
 你能用同样的思路同样数量的解法用Java实现么，以此为开头，给出带注释完整代码
 class Solution {
-    public int[][] insert(int[][] intervals, int[] newInterval) {
+    public int lengthOfLastWord(String s) {
 
     }
 }
 你能用同样的思路同样数量的解法用c++实现么，以此为开头，给出带注释完整代码
 class Solution {
 public:
-    vector<vector<int>> insert(vector<vector<int>>& intervals, vector<int>& newInterval) {
+    int lengthOfLastWord(string s) {
 
     }
 };
