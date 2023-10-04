@@ -28,21 +28,63 @@
 
 ```Prompt
 我们用中文交流，你能理解这段代码么，逐行加上注释
-func lengthOfLastWord(s string) int {
-	last := len(s) - 1
-	for last >= 0 && s[last] == ' ' {
-		last--
+func generateMatrix(n int) [][]int {
+	if n == 0 {
+		return [][]int{}
 	}
-	if last < 0 {
-		return 0
+	if n == 1 {
+		return [][]int{[]int{1}}
 	}
-	first := last
-	for first >= 0 && s[first] != ' ' {
-		first--
+	res, visit, round, x, y, spDir := make([][]int, n), make([][]int, n), 0, 0, 0, [][]int{
+		[]int{0, 1},  // 朝右
+		[]int{1, 0},  // 朝下
+		[]int{0, -1}, // 朝左
+		[]int{-1, 0}, // 朝上
 	}
-	return last - first
+	for i := 0; i < n; i++ {
+		visit[i] = make([]int, n)
+		res[i] = make([]int, n)
+	}
+	visit[x][y] = 1
+	res[x][y] = 1
+	for i := 0; i < n*n; i++ {
+		x += spDir[round%4][0]
+		y += spDir[round%4][1]
+		if (x == 0 && y == n-1) || (x == n-1 && y == n-1) || (y == 0 && x == n-1) {
+			round++
+		}
+		if x > n-1 || y > n-1 || x < 0 || y < 0 {
+			return res
+		}
+		if visit[x][y] == 0 {
+			visit[x][y] = 1
+			res[x][y] = i + 2
+		}
+		switch round % 4 {
+		case 0:
+			if y+1 <= n-1 && visit[x][y+1] == 1 {
+				round++
+				continue
+			}
+		case 1:
+			if x+1 <= n-1 && visit[x+1][y] == 1 {
+				round++
+				continue
+			}
+		case 2:
+			if y-1 >= 0 && visit[x][y-1] == 1 {
+				round++
+				continue
+			}
+		case 3:
+			if x-1 >= 0 && visit[x-1][y] == 1 {
+				round++
+				continue
+			}
+		}
+	}
+	return res
 }
-
 给出完善后带注释完整代码
 
 给出测试输出语句
@@ -52,17 +94,17 @@ func insert(intervals [][]int, newInterval []int) [][]int {
 }
 你能用同样的思路同样数量的解法用Python实现么，以此为开头，给出带注释完整代码
 class Solution:
-    def lengthOfLastWord(self, s: str) -> int:
+    def generateMatrix(self, n: int) -> List[List[int]]:
 你能用同样的思路同样数量的解法用Java实现么，以此为开头，给出带注释完整代码
 class Solution {
-    public int lengthOfLastWord(String s) {
+    public int[][] generateMatrix(int n) {
 
     }
 }
 你能用同样的思路同样数量的解法用c++实现么，以此为开头，给出带注释完整代码
 class Solution {
 public:
-    int lengthOfLastWord(string s) {
+    vector<vector<int>> generateMatrix(int n) {
 
     }
 };

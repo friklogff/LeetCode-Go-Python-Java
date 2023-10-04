@@ -118,4 +118,6 @@ https://github.com/halfrost/LeetCode-Go
 - 2023-10-02
   - 0057.Insert-Interval
 - 2023-10-03
-  - 0057.Insert-Interval
+  - 0058.Length-of-Last-Word
+- 2023-10-04
+  - 0059.Spiral-Matrix-II
