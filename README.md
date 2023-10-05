@@ -121,3 +121,5 @@ https://github.com/halfrost/LeetCode-Go
   - 0058.Length-of-Last-Word
 - 2023-10-04
   - 0059.Spiral-Matrix-II
+- 2023-10-05
+  - 0060.Permutation-Sequence

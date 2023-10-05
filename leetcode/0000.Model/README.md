@@ -28,62 +28,41 @@
 
 ```Prompt
 我们用中文交流，你能理解这段代码么，逐行加上注释
-func generateMatrix(n int) [][]int {
-	if n == 0 {
-		return [][]int{}
+import (
+	"fmt"
+	"strconv"
+)
+
+func getPermutation(n int, k int) string {
+	if k == 0 {
+		return ""
 	}
-	if n == 1 {
-		return [][]int{[]int{1}}
-	}
-	res, visit, round, x, y, spDir := make([][]int, n), make([][]int, n), 0, 0, 0, [][]int{
-		[]int{0, 1},  // 朝右
-		[]int{1, 0},  // 朝下
-		[]int{0, -1}, // 朝左
-		[]int{-1, 0}, // 朝上
+	used, p, res := make([]bool, n), []int{}, ""
+	findPermutation(n, 0, &k, p, &res, &used)
+	return res
+}
+
+func findPermutation(n, index int, k *int, p []int, res *string, used *[]bool) {
+	fmt.Printf("n = %v index = %v k = %v p = %v res = %v user = %v\n", n, index, *k, p, *res, *used)
+	if index == n {
+		*k--
+		if *k == 0 {
+			for _, v := range p {
+				*res += strconv.Itoa(v + 1)
+			}
+		}
+		return
 	}
 	for i := 0; i < n; i++ {
-		visit[i] = make([]int, n)
-		res[i] = make([]int, n)
-	}
-	visit[x][y] = 1
-	res[x][y] = 1
-	for i := 0; i < n*n; i++ {
-		x += spDir[round%4][0]
-		y += spDir[round%4][1]
-		if (x == 0 && y == n-1) || (x == n-1 && y == n-1) || (y == 0 && x == n-1) {
-			round++
-		}
-		if x > n-1 || y > n-1 || x < 0 || y < 0 {
-			return res
-		}
-		if visit[x][y] == 0 {
-			visit[x][y] = 1
-			res[x][y] = i + 2
-		}
-		switch round % 4 {
-		case 0:
-			if y+1 <= n-1 && visit[x][y+1] == 1 {
-				round++
-				continue
-			}
-		case 1:
-			if x+1 <= n-1 && visit[x+1][y] == 1 {
-				round++
-				continue
-			}
-		case 2:
-			if y-1 >= 0 && visit[x][y-1] == 1 {
-				round++
-				continue
-			}
-		case 3:
-			if x-1 >= 0 && visit[x-1][y] == 1 {
-				round++
-				continue
-			}
+		if !(*used)[i] {
+			(*used)[i] = true
+			p = append(p, i)
+			findPermutation(n, index+1, k, p, res, used)
+			p = p[:len(p)-1]
+			(*used)[i] = false
 		}
 	}
-	return res
+	return
 }
 给出完善后带注释完整代码
 
@@ -94,17 +73,17 @@ func insert(intervals [][]int, newInterval []int) [][]int {
 }
 你能用同样的思路同样数量的解法用Python实现么，以此为开头，给出带注释完整代码
 class Solution:
-    def generateMatrix(self, n: int) -> List[List[int]]:
+    def getPermutation(self, n: int, k: int) -> str:
 你能用同样的思路同样数量的解法用Java实现么，以此为开头，给出带注释完整代码
 class Solution {
-    public int[][] generateMatrix(int n) {
+    public String getPermutation(int n, int k) {
 
     }
 }
 你能用同样的思路同样数量的解法用c++实现么，以此为开头，给出带注释完整代码
 class Solution {
 public:
-    vector<vector<int>> generateMatrix(int n) {
+    string getPermutation(int n, int k) {
 
     }
 };
