@@ -28,21 +28,34 @@
 
 ```Prompt
 我们用中文交流，你能理解这段代码么，逐行加上注释
-func uniquePaths(m int, n int) int {
-	dp := make([][]int, n)
-	for i := 0; i < n; i++ {
-		dp[i] = make([]int, m)
+func minPathSum(grid [][]int) int {
+	m := len(grid)
+	if m == 0 {
+		return 0
 	}
-	for i := 0; i < n; i++ {
-		for j := 0; j < m; j++ {
-			if i == 0 || j == 0 {
-				dp[i][j] = 1
+	n := len(grid[0])
+	dp := make([]int, n)
+	dp[0] = grid[0][0]
+	for i := 1; i < n; i++ {
+		dp[i] = grid[0][i] + dp[i-1]
+	}
+	for i := 1; i < m; i++ {
+		for j := 0; j < n; j++ {
+			if j == 0 {
+				dp[0] = dp[0] + grid[i][0]
 				continue
 			}
-			dp[i][j] = dp[i-1][j] + dp[i][j-1]
+			dp[j] = min(dp[j-1], dp[j]) + grid[i][j]
 		}
 	}
-	return dp[n-1][m-1]
+	return dp[n-1]
+}
+
+func min(a, b int) int {
+	if a < b {
+		return a
+	}
+	return b
 }
 给出完善后带注释完整代码
 
@@ -53,17 +66,17 @@ func insert(intervals [][]int, newInterval []int) [][]int {
 }
 你能用同样的思路同样数量的解法用Python实现么，以此为开头，给出带注释完整代码
 class Solution:
-    def uniquePaths(self, m: int, n: int) -> int:
+    def minPathSum(self, grid: List[List[int]]) -> int:
 你能用同样的思路同样数量的解法用Java实现么，以此为开头，给出带注释完整代码
 class Solution {
-    public int uniquePaths(int m, int n) {
+    public int minPathSum(int[][] grid) {
 
     }
 }
 你能用同样的思路同样数量的解法用c++实现么，以此为开头，给出带注释完整代码
 class Solution {
 public:
-    int uniquePaths(int m, int n) {
+    int minPathSum(vector<vector<int>>& grid) {
 
     }
 };

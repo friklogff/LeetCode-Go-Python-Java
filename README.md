@@ -123,3 +123,9 @@ https://github.com/halfrost/LeetCode-Go
   - 0059.Spiral-Matrix-II
 - 2023-10-05
   - 0060.Permutation-Sequence
+- 2023-10-06
+  - 0061.Rotate-List
+- 2023-10-07
+  - 0062.Unique-Paths
+- 2023-10-05
+  - 0063.Unique-Paths-II
