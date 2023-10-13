@@ -127,5 +127,17 @@ https://github.com/halfrost/LeetCode-Go
   - 0061.Rotate-List
 - 2023-10-07
   - 0062.Unique-Paths
-- 2023-10-05
+- 2023-10-08
+  - 0063.Unique-Paths-II
+- 2023-10-09
+  - 0064.Minimum-Path-Sum
+- 2023-10-10
+  - 0065.Valid-Number
+- 2023-10-11
+  - 0066.Plus-One
+- 2023-10-12
+  - 0067.Add-Binary
+- 2023-10-13
+  - 0068.Text-Justification
+- 2023-10-14
   - 0063.Unique-Paths-II
