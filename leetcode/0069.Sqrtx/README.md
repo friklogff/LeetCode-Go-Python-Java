@@ -3,11 +3,11 @@
 
 ## 题目
 
-Implement `int sqrt(int x)`.
+Implement`int sqrt(int x)`.
 
-Compute and return the square root of *x*, where *x* is guaranteed to be a non-negative integer.
+Compute and return the square root of*x*, where*x*is guaranteed to be a non-negative integer.
 
-Since the return type is an integer, the decimal digits are truncated and only the integer part of the result is returned.
+Since the return typeis an integer, the decimal digits are truncated and only the integer part of the resultis returned.
 
 **Example 1:**
 
@@ -24,7 +24,7 @@ Since the return type is an integer, the decimal digits are truncated and only 
 
 ## 题目大意
 
-实现 int sqrt(int x) 函数。计算并返回 x 的平方根，其中 x 是非负整数。由于返回类型是整数，结果只保留整数的部分，小数部分将被舍去。
+实现int sqrt(int x)函数。计算并返回x的平方根，其中x 是非负整数。由于返回类型是整数，结果只保留整数的部分，小数部分将被舍去。
 
 
 
@@ -35,3 +35,28 @@ Since the return type is an integer, the decimal digits are truncated and only 
 - 解题思路二，牛顿迭代法。求根号 x，即求满足 `x^2 - n = 0` 方程的所有解。
 
     ![](https://img-blog.csdn.net/20171019164040871?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvY2hlbnJlbnhpYW5n/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center)
+## 代码
+
+## Go
+
+```Go
+
+```
+
+## Python
+
+```Python
+
+```
+
+## Java
+
+```Java
+
+```
+
+## Cpp
+
+```Cpp
+
+```
