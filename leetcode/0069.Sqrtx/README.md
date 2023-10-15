@@ -40,23 +40,136 @@ Since the return typeis an integer, the decimal digits are truncated and only th
 ## Go
 
 ```Go
+// 定义一个函数 mySqrt，用于计算整数 x 的平方根
+func mySqrt(x int) int {
+    // 如果 x 为 0，直接返回 0
+    if x == 0 {
+        return 0
+    }
+    // 如果 x 小于 4，直接返回 1，因为 1 的平方是 1，2 的平方是 4，3 的平方是 9
+    if x < 4 {
+        return 1
+    }
+
+    // 调用 binarySearch2 函数进行二分查找，寻找 x 的平方根
+    res := binarySearch2(2, x/2, x)
+    // 如果找到的平方根的平方大于 x，则返回平方根减 1
+    if res*res > x {
+        return res - 1
+    }
+    // 否则直接返回找到的平方根
+    return res
+}
+
+// 定义一个二分查找函数 binarySearch2，用于在区间 [l, r] 中寻找 target 的平方根
+func binarySearch2(l, r, target int) int {
+    // 使用循环进行二分查找
+    for l < r {
+        // 计算中间值 mid，避免溢出使用位运算
+        mid := l + ((r - l) >> 1)
+
+        // 计算中间值的平方
+        tmp := mid * mid
+
+        // 如果中间值的平方等于目标值，则直接返回中间值
+        if tmp == target {
+            return mid
+        } else if tmp < target {
+            // 如果中间值的平方小于目标值，则将搜索范围缩小到[mid+1, r]
+            l = mid + 1
+        } else {
+            // 如果中间值的平方大于目标值，则将搜索范围缩小到[l, mid-1]
+            r = mid - 1
+        }
+    }
+    // 如果循环结束时 l >= r，返回 l 即可
+    return l
+}
 
 ```
 
 ## Python
 
 ```Python
+class Solution:
+    def mySqrt(self, x: int) -> int:
+        if x == 0:
+            return 0
+        if x < 4:
+            return 1
+
+        res = self.binarySearch(2, x // 2, x)
+        if res * res > x:
+            return res - 1
+        return res
+
+    def binarySearch(self, l, r, target):
+        while l < r:
+            mid = l + ((r - l) >> 1)
+            tmp = mid * mid
+            if tmp == target:
+                return mid
+            elif tmp < target:
+                l = mid + 1
+            else:
+                r = mid - 1
+        return l
 
 ```
 
 ## Java
 
 ```Java
+class Solution {
+    public int mySqrt(int x) {
+        if (x == 0) {
+            return 0;
+        }
+
+        // 将 C 初始化为 x，x0 初始化为 x
+        double C = x, x0 = x;
+
+        // 使用牛顿迭代法逼近平方根
+        while (true) {
+            // 计算下一个迭代值 xi
+            double xi = 0.5 * (x0 + C / x0);
+
+            // 如果当前迭代值与上一次迭代值之差小于 1e-7，则认为已经逼近到足够精度，跳出循环
+            if (Math.abs(x0 - xi) < 1e-7) {
+                break;
+            }
+
+            // 更新迭代值 x0
+            x0 = xi;
+        }
+
+        // 将最终的浮点数转换为整数并返回
+        return (int) x0;
+    }
+}
 
 ```
 
 ## Cpp
 
 ```Cpp
+class Solution {
+public:
+    int mySqrt(int x) {
+        if (x == 0) {
+            return 0;
+        }
+
+        double C = x, x0 = x;
+        while (true) {
+            double xi = 0.5 * (x0 + C / x0);
+            if (fabs(x0 - xi) < 1e-7) {
+                break;
+            }
+            x0 = xi;
+        }
+        return int(x0);
+    }
+};
 
 ```
