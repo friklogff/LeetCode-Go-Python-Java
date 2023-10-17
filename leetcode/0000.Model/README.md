@@ -28,19 +28,34 @@
 
 ```Prompt
 我们用中文交流，你能理解这段代码么，逐行加上注释
-func simplifyPath(path string) string {
-    stack := []string{}
-    for _, name := range strings.Split(path, "/") {
-        if name == ".." {
-            if len(stack) > 0 {
-                stack = stack[:len(stack)-1]
+func minDistance(s, t string) int {
+    n, m := len(s), len(t)
+    f := make([][]int, n+1)
+    for i := range f {
+        f[i] = make([]int, m+1)
+    }
+    for j := 1; j <= m; j++ {
+        f[0][j] = j
+    }
+    for i, x := range s {
+        f[i+1][0] = i + 1
+        for j, y := range t {
+            if x == y {
+                f[i+1][j+1] = f[i][j]
+            } else {
+                f[i+1][j+1] = min(min(f[i][j+1], f[i+1][j]), f[i][j]) + 1
             }
-        } else if name != "" && name != "." {
-            stack = append(stack, name)
         }
     }
-    return "/" + strings.Join(stack, "/")
+    return f[n][m]
 }
+
+func min(a, b int) int { if b < a { return b }; return a }
+
+作者：灵茶山艾府
+链接：https://leetcode.cn/problems/edit-distance/
+来源：力扣（LeetCode）
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
 
  
 
@@ -51,17 +66,17 @@ func insert(intervals [][]int, newInterval []int) [][]int {
 }
 你能用同样的思路同样数量的解法用Python实现么，以此为开头，给出带注释完整代码
 class Solution:
-    def simplifyPath(self, path: str) -> str:
+    def minDistance(self, word1: str, word2: str) -> int:
 你能用同样的思路同样数量的解法用Java实现么，以此为开头，给出带注释完整代码
 class Solution {
-    public String simplifyPath(String path) {
+    public int minDistance(String word1, String word2) {
 
     }
 }
 你能用同样的思路同样数量的解法用c++实现么，以此为开头，给出带注释完整代码
 class Solution {
 public:
-    string simplifyPath(string path) {
+    int minDistance(string word1, string word2) {
 
     }
 };
