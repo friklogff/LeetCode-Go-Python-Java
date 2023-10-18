@@ -140,4 +140,20 @@ https://github.com/halfrost/LeetCode-Go
 - 2023-10-13
   - 0068.Text-Justification
 - 2023-10-14
-  - 0063.Unique-Paths-II
+  - 0069.Sqrtx
+- 2023-10-15
+  - 0070.Climbing-Stairs
+- 2023-10-16
+  - 0071.Simplify-Path
+- 2023-10-17
+  - 0072.Edit-Distance
+- 2023-10-18
+  - 0073.Set-Matrix-Zeroes
+- 2023-10-19
+  - 0074.Search-a-2D-Matrix
+- 2023-10-20
+  - 0075.Sort-Colors
+- 2023-10-21
+  - 0076.Minimum-Window-Substring
+- 2023-10-22
+  - 0077.Combinations

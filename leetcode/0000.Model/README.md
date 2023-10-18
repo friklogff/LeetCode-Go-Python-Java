@@ -28,35 +28,58 @@
 
 ```Prompt
 我们用中文交流，你能理解这段代码么，逐行加上注释
-func minDistance(s, t string) int {
-    n, m := len(s), len(t)
-    f := make([][]int, n+1)
-    for i := range f {
-        f[i] = make([]int, m+1)
-    }
-    for j := 1; j <= m; j++ {
-        f[0][j] = j
-    }
-    for i, x := range s {
-        f[i+1][0] = i + 1
-        for j, y := range t {
-            if x == y {
-                f[i+1][j+1] = f[i][j]
-            } else {
-                f[i+1][j+1] = min(min(f[i][j+1], f[i+1][j]), f[i][j]) + 1
-            }
-        }
-    }
-    return f[n][m]
+func setZeroes(matrix [][]int) {
+	if len(matrix) == 0 || len(matrix[0]) == 0 {
+		return
+	}
+	isFirstRowExistZero, isFirstColExistZero := false, false
+	for i := 0; i < len(matrix); i++ {
+		if matrix[i][0] == 0 {
+			isFirstColExistZero = true
+			break
+		}
+	}
+	for j := 0; j < len(matrix[0]); j++ {
+		if matrix[0][j] == 0 {
+			isFirstRowExistZero = true
+			break
+		}
+	}
+	for i := 1; i < len(matrix); i++ {
+		for j := 1; j < len(matrix[0]); j++ {
+			if matrix[i][j] == 0 {
+				matrix[i][0] = 0
+				matrix[0][j] = 0
+			}
+		}
+	}
+	// 处理[1:]行全部置 0
+	for i := 1; i < len(matrix); i++ {
+		if matrix[i][0] == 0 {
+			for j := 1; j < len(matrix[0]); j++ {
+				matrix[i][j] = 0
+			}
+		}
+	}
+	// 处理[1:]列全部置 0
+	for j := 1; j < len(matrix[0]); j++ {
+		if matrix[0][j] == 0 {
+			for i := 1; i < len(matrix); i++ {
+				matrix[i][j] = 0
+			}
+		}
+	}
+	if isFirstRowExistZero {
+		for j := 0; j < len(matrix[0]); j++ {
+			matrix[0][j] = 0
+		}
+	}
+	if isFirstColExistZero {
+		for i := 0; i < len(matrix); i++ {
+			matrix[i][0] = 0
+		}
+	}
 }
-
-func min(a, b int) int { if b < a { return b }; return a }
-
-作者：灵茶山艾府
-链接：https://leetcode.cn/problems/edit-distance/
-来源：力扣（LeetCode）
-著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
-
  
 
 给出测试输出语句
@@ -66,17 +89,20 @@ func insert(intervals [][]int, newInterval []int) [][]int {
 }
 你能用同样的思路同样数量的解法用Python实现么，以此为开头，给出带注释完整代码
 class Solution:
-    def minDistance(self, word1: str, word2: str) -> int:
+    def setZeroes(self, matrix: List[List[int]]) -> None:
+        """
+        Do not return anything, modify matrix in-place instead.
+        """
 你能用同样的思路同样数量的解法用Java实现么，以此为开头，给出带注释完整代码
 class Solution {
-    public int minDistance(String word1, String word2) {
+    public void setZeroes(int[][] matrix) {
 
     }
 }
 你能用同样的思路同样数量的解法用c++实现么，以此为开头，给出带注释完整代码
 class Solution {
 public:
-    int minDistance(string word1, string word2) {
+    void setZeroes(vector<vector<int>>& matrix) {
 
     }
 };
