@@ -28,57 +28,22 @@
 
 ```Prompt
 我们用中文交流，你能理解这段代码么，逐行加上注释
-func setZeroes(matrix [][]int) {
-	if len(matrix) == 0 || len(matrix[0]) == 0 {
-		return
+func searchMatrix(matrix [][]int, target int) bool {
+	if len(matrix) == 0 {
+		return false
 	}
-	isFirstRowExistZero, isFirstColExistZero := false, false
-	for i := 0; i < len(matrix); i++ {
-		if matrix[i][0] == 0 {
-			isFirstColExistZero = true
-			break
+	m, low, high := len(matrix[0]), 0, len(matrix[0])*len(matrix)-1
+	for low <= high {
+		mid := low + (high-low)>>1
+		if matrix[mid/m][mid%m] == target {
+			return true
+		} else if matrix[mid/m][mid%m] > target {
+			high = mid - 1
+		} else {
+			low = mid + 1
 		}
 	}
-	for j := 0; j < len(matrix[0]); j++ {
-		if matrix[0][j] == 0 {
-			isFirstRowExistZero = true
-			break
-		}
-	}
-	for i := 1; i < len(matrix); i++ {
-		for j := 1; j < len(matrix[0]); j++ {
-			if matrix[i][j] == 0 {
-				matrix[i][0] = 0
-				matrix[0][j] = 0
-			}
-		}
-	}
-	// 处理[1:]行全部置 0
-	for i := 1; i < len(matrix); i++ {
-		if matrix[i][0] == 0 {
-			for j := 1; j < len(matrix[0]); j++ {
-				matrix[i][j] = 0
-			}
-		}
-	}
-	// 处理[1:]列全部置 0
-	for j := 1; j < len(matrix[0]); j++ {
-		if matrix[0][j] == 0 {
-			for i := 1; i < len(matrix); i++ {
-				matrix[i][j] = 0
-			}
-		}
-	}
-	if isFirstRowExistZero {
-		for j := 0; j < len(matrix[0]); j++ {
-			matrix[0][j] = 0
-		}
-	}
-	if isFirstColExistZero {
-		for i := 0; i < len(matrix); i++ {
-			matrix[i][0] = 0
-		}
-	}
+	return false
 }
  
 
@@ -89,20 +54,17 @@ func insert(intervals [][]int, newInterval []int) [][]int {
 }
 你能用同样的思路同样数量的解法用Python实现么，以此为开头，给出带注释完整代码
 class Solution:
-    def setZeroes(self, matrix: List[List[int]]) -> None:
-        """
-        Do not return anything, modify matrix in-place instead.
-        """
+    def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
 你能用同样的思路同样数量的解法用Java实现么，以此为开头，给出带注释完整代码
 class Solution {
-    public void setZeroes(int[][] matrix) {
+    public boolean searchMatrix(int[][] matrix, int target) {
 
     }
 }
 你能用同样的思路同样数量的解法用c++实现么，以此为开头，给出带注释完整代码
 class Solution {
 public:
-    void setZeroes(vector<vector<int>>& matrix) {
+    bool searchMatrix(vector<vector<int>>& matrix, int target) {
 
     }
 };
