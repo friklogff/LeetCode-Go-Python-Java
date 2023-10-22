@@ -28,61 +28,64 @@
 
 ```Prompt
 我们用中文交流，你能理解这段代码么，逐行加上注释
+// <-.#.time:2023.10.3 #.0371 (1) 
+import java.util.AbstractList; 
+class Solution {
+    private List<List<Integer>> res; 
+    public List<List<Integer>> combine(int n, int k) {
+        return new AbstractList<List<Integer>>() {
+            @Override 
+            public int size() {
+                init(); 
+                return res.size(); 
+            }
+            @Override 
+            public List<Integer> get(int index) {
+                init(); 
+                return res.get(index); 
+            }
+            protected void init() {
+                if (res != null)
+                    return ;
+                res = new ArrayList<List<Integer>>(); 
+                dfsHelper(-1, n, k, res, new ArrayList<Integer>()); 
+            }
+        }; 
+    }
+    private void dfsHelper(int parentDepth, int n, int k, List<List<Integer>> res, List<Integer> subset) {
+        parentDepth += 1; 
+        if (parentDepth == n) {
+            if (subset.size() == k) {
+                res.add(new ArrayList<Integer>(subset)); 
+            }
+        } else {
+            /* <-.前序决策左、右子结点: */
+            dfsHelper(parentDepth, n, k, res, subset); 
 
-func minWindow(s string, t string) string {
-	if s == "" || t == "" {
-		return ""
-	}
-	var tFreq, sFreq [256]int
-	result, left, right, finalLeft, finalRight, minW, count := "", 0, -1, -1, -1, len(s)+1, 0
-
-	for i := 0; i < len(t); i++ {
-		tFreq[t[i]-'a']++
-	}
-
-	for left < len(s) {
-		if right+1 < len(s) && count < len(t) {
-			sFreq[s[right+1]-'a']++
-			if sFreq[s[right+1]-'a'] <= tFreq[s[right+1]-'a'] {
-				count++
-			}
-			right++
-		} else {
-			if right-left+1 < minW && count == len(t) {
-				minW = right - left + 1
-				finalLeft = left
-				finalRight = right
-			}
-			if sFreq[s[left]-'a'] == tFreq[s[left]-'a'] {
-				count--
-			}
-			sFreq[s[left]-'a']--
-			left++
-		}
-	}
-	if finalLeft != -1 {
-		result = string(s[finalLeft : finalRight+1])
-	}
-	return result
+            subset.add(parentDepth + 1); 
+            dfsHelper(parentDepth, n, k, res, subset); 
+            subset.remove(subset.size() - 1); 
+        }
+    }
 }
 给出测试输出语句
 你能用同样的思路同样数量的解法用go实现么，以此为开头，给出带注释完整代码
-func insert(intervals [][]int, newInterval []int) [][]int {
+func combine(n int, k int) [][]int {
 
 }
 你能用同样的思路同样数量的解法用Python实现么，以此为开头，给出带注释完整代码
 class Solution:
-    def minWindow(self, s: str, t: str) -> str:
+    def combine(self, n: int, k: int) -> List[List[int]]:
 你能用同样的思路同样数量的解法用Java实现么，以此为开头，给出带注释完整代码
 class Solution {
-    public String minWindow(String s, String t) {
+    public List<List<Integer>> combine(int n, int k) {
 
     }
 }
 你能用同样的思路同样数量的解法用c++实现么，以此为开头，给出带注释完整代码
 class Solution {
 public:
-    string minWindow(string s, string t) {
+    vector<vector<int>> combine(int n, int k) {
 
     }
 };
