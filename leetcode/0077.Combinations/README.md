@@ -25,3 +25,28 @@ Given two integers *n* and *k*, return all possible combinations of *k* num
 ## 解题思路
 
 - 计算排列组合中的组合，用 DFS 深搜即可，注意剪枝
+## 代码
+
+## Go
+
+```Go
+
+```
+
+## Python
+
+```Python
+
+```
+
+## Java
+
+```Java
+
+```
+
+## Cpp
+
+```Cpp
+
+```
