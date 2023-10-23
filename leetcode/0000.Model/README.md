@@ -28,45 +28,31 @@
 
 ```Prompt
 我们用中文交流，你能理解这段代码么，逐行加上注释
-// <-.#.time:2023.10.3 #.0371 (1) 
-import java.util.AbstractList; 
-class Solution {
-    private List<List<Integer>> res; 
-    public List<List<Integer>> combine(int n, int k) {
-        return new AbstractList<List<Integer>>() {
-            @Override 
-            public int size() {
-                init(); 
-                return res.size(); 
-            }
-            @Override 
-            public List<Integer> get(int index) {
-                init(); 
-                return res.get(index); 
-            }
-            protected void init() {
-                if (res != null)
-                    return ;
-                res = new ArrayList<List<Integer>>(); 
-                dfsHelper(-1, n, k, res, new ArrayList<Integer>()); 
-            }
-        }; 
-    }
-    private void dfsHelper(int parentDepth, int n, int k, List<List<Integer>> res, List<Integer> subset) {
-        parentDepth += 1; 
-        if (parentDepth == n) {
-            if (subset.size() == k) {
-                res.add(new ArrayList<Integer>(subset)); 
-            }
-        } else {
-            /* <-.前序决策左、右子结点: */
-            dfsHelper(parentDepth, n, k, res, subset); 
+import "sort"
 
-            subset.add(parentDepth + 1); 
-            dfsHelper(parentDepth, n, k, res, subset); 
-            subset.remove(subset.size() - 1); 
-        }
-    }
+// 解法一
+func subsets(nums []int) [][]int {
+	c, res := []int{}, [][]int{}
+	for k := 0; k <= len(nums); k++ {
+		generateSubsets(nums, k, 0, c, &res)
+	}
+	return res
+}
+
+func generateSubsets(nums []int, k, start int, c []int, res *[][]int) {
+	if len(c) == k {
+		b := make([]int, len(c))
+		copy(b, c)
+		*res = append(*res, b)
+		return
+	}
+	// i will at most be n - (k - c.size()) + 1
+	for i := start; i < len(nums)-(k-len(c))+1; i++ {
+		c = append(c, nums[i])
+		generateSubsets(nums, k, i+1, c, res)
+		c = c[:len(c)-1]
+	}
+	return
 }
 给出测试输出语句
 你能用同样的思路同样数量的解法用go实现么，以此为开头，给出带注释完整代码
@@ -75,17 +61,17 @@ func combine(n int, k int) [][]int {
 }
 你能用同样的思路同样数量的解法用Python实现么，以此为开头，给出带注释完整代码
 class Solution:
-    def combine(self, n: int, k: int) -> List[List[int]]:
+    def subsets(self, nums: List[int]) -> List[List[int]]:
 你能用同样的思路同样数量的解法用Java实现么，以此为开头，给出带注释完整代码
 class Solution {
-    public List<List<Integer>> combine(int n, int k) {
+    public List<List<Integer>> subsets(int[] nums) {
 
     }
 }
 你能用同样的思路同样数量的解法用c++实现么，以此为开头，给出带注释完整代码
 class Solution {
 public:
-    vector<vector<int>> combine(int n, int k) {
+    vector<vector<int>> subsets(vector<int>& nums) {
 
     }
 };
