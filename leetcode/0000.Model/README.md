@@ -28,32 +28,78 @@
 
 ```Prompt
 我们用中文交流，你能理解这段代码么，逐行加上注释
-import "sort"
+func exist(board [][]byte, word string) bool {
+    m := len(board)
+    n := len(board[0])
+    l := len(word)
 
-// 解法一
-func subsets(nums []int) [][]int {
-	c, res := []int{}, [][]int{}
-	for k := 0; k <= len(nums); k++ {
-		generateSubsets(nums, k, 0, c, &res)
+    bcnts := make(map[byte]int)
+	for i := 0; i < m; i++ {
+		for j := 0; j < n; j++ {
+			ch := board[i][j]
+			_, exists := bcnts[ch]
+			if !exists {
+				bcnts[ch] = 0
+			}
+			bcnts[ch] += 1
+		}
 	}
-	return res
+
+	wcnts := make(map[byte]int)
+    for i := 0; i < l; i++ {
+		_, exists := wcnts[word[i]]
+		if !exists {
+			wcnts[word[i]] = 0
+		}
+		wcnts[word[i]] += 1
+    }
+
+    for ch, wcnt := range wcnts {
+		bcnt, exists := bcnts[ch]
+		if !exists || bcnt < wcnt {
+			return false
+		}
+	}
+
+
+    var f func(int, int, int) bool
+    f = func(x, y int, idx int) bool {
+        if idx == l {
+            return true
+        }
+    
+        if x < 0 || x >= m {
+            return false
+        }
+        if y < 0 || y >= n {
+            return false
+        }
+
+        if board[x][y] == '*' {
+            return false
+        }
+
+        if board[x][y] == word[idx] {
+            origin := board[x][y]
+            board[x][y] = '*'
+            if f(x, y-1, idx+1) ||  f(x, y+1, idx+1) ||  f(x-1, y, idx+1) ||  f(x+1, y, idx+1) {
+                return true
+            }
+            board[x][y] = origin
+        }
+        return false
+    }
+
+    for i := 0; i < m; i++ {
+        for j := 0; j < n; j++ {
+            if f(i, j, 0) {
+                return true
+            }
+        }
+    }
+    return false
 }
 
-func generateSubsets(nums []int, k, start int, c []int, res *[][]int) {
-	if len(c) == k {
-		b := make([]int, len(c))
-		copy(b, c)
-		*res = append(*res, b)
-		return
-	}
-	// i will at most be n - (k - c.size()) + 1
-	for i := start; i < len(nums)-(k-len(c))+1; i++ {
-		c = append(c, nums[i])
-		generateSubsets(nums, k, i+1, c, res)
-		c = c[:len(c)-1]
-	}
-	return
-}
 给出测试输出语句
 你能用同样的思路同样数量的解法用go实现么，以此为开头，给出带注释完整代码
 func combine(n int, k int) [][]int {
@@ -61,17 +107,17 @@ func combine(n int, k int) [][]int {
 }
 你能用同样的思路同样数量的解法用Python实现么，以此为开头，给出带注释完整代码
 class Solution:
-    def subsets(self, nums: List[int]) -> List[List[int]]:
+    def exist(self, board: List[List[str]], word: str) -> bool:
 你能用同样的思路同样数量的解法用Java实现么，以此为开头，给出带注释完整代码
 class Solution {
-    public List<List<Integer>> subsets(int[] nums) {
+    public boolean exist(char[][] board, String word) {
 
     }
 }
 你能用同样的思路同样数量的解法用c++实现么，以此为开头，给出带注释完整代码
 class Solution {
 public:
-    vector<vector<int>> subsets(vector<int>& nums) {
+    bool exist(vector<vector<char>>& board, string word) {
 
     }
 };
