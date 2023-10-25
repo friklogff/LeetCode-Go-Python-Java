@@ -28,76 +28,15 @@
 
 ```Prompt
 我们用中文交流，你能理解这段代码么，逐行加上注释
-func exist(board [][]byte, word string) bool {
-    m := len(board)
-    n := len(board[0])
-    l := len(word)
-
-    bcnts := make(map[byte]int)
-	for i := 0; i < m; i++ {
-		for j := 0; j < n; j++ {
-			ch := board[i][j]
-			_, exists := bcnts[ch]
-			if !exists {
-				bcnts[ch] = 0
-			}
-			bcnts[ch] += 1
+func removeDuplicates(nums []int) int {
+	slow := 0
+	for fast, v := range nums {
+		if fast < 2 || nums[slow-2] != v {
+			nums[slow] = v
+			slow++
 		}
 	}
-
-	wcnts := make(map[byte]int)
-    for i := 0; i < l; i++ {
-		_, exists := wcnts[word[i]]
-		if !exists {
-			wcnts[word[i]] = 0
-		}
-		wcnts[word[i]] += 1
-    }
-
-    for ch, wcnt := range wcnts {
-		bcnt, exists := bcnts[ch]
-		if !exists || bcnt < wcnt {
-			return false
-		}
-	}
-
-
-    var f func(int, int, int) bool
-    f = func(x, y int, idx int) bool {
-        if idx == l {
-            return true
-        }
-    
-        if x < 0 || x >= m {
-            return false
-        }
-        if y < 0 || y >= n {
-            return false
-        }
-
-        if board[x][y] == '*' {
-            return false
-        }
-
-        if board[x][y] == word[idx] {
-            origin := board[x][y]
-            board[x][y] = '*'
-            if f(x, y-1, idx+1) ||  f(x, y+1, idx+1) ||  f(x-1, y, idx+1) ||  f(x+1, y, idx+1) {
-                return true
-            }
-            board[x][y] = origin
-        }
-        return false
-    }
-
-    for i := 0; i < m; i++ {
-        for j := 0; j < n; j++ {
-            if f(i, j, 0) {
-                return true
-            }
-        }
-    }
-    return false
+	return slow
 }
 
 给出测试输出语句
@@ -107,17 +46,17 @@ func combine(n int, k int) [][]int {
 }
 你能用同样的思路同样数量的解法用Python实现么，以此为开头，给出带注释完整代码
 class Solution:
-    def exist(self, board: List[List[str]], word: str) -> bool:
+    def removeDuplicates(self, nums: List[int]) -> int:
 你能用同样的思路同样数量的解法用Java实现么，以此为开头，给出带注释完整代码
 class Solution {
-    public boolean exist(char[][] board, String word) {
+    public int removeDuplicates(int[] nums) {
 
     }
 }
 你能用同样的思路同样数量的解法用c++实现么，以此为开头，给出带注释完整代码
 class Solution {
 public:
-    bool exist(vector<vector<char>>& board, string word) {
+    int removeDuplicates(vector<int>& nums) {
 
     }
 };
