@@ -28,15 +28,37 @@
 
 ```Prompt
 我们用中文交流，你能理解这段代码么，逐行加上注释
-func removeDuplicates(nums []int) int {
-	slow := 0
-	for fast, v := range nums {
-		if fast < 2 || nums[slow-2] != v {
-			nums[slow] = v
-			slow++
+func search(nums []int, target int) bool {
+	if len(nums) == 0 {
+		return false
+	}
+	low, high := 0, len(nums)-1
+	for low <= high {
+		mid := low + (high-low)>>1
+		if nums[mid] == target {
+			return true
+		} else if nums[mid] > nums[low] { // 在数值大的一部分区间里
+			if nums[low] <= target && target < nums[mid] {
+				high = mid - 1
+			} else {
+				low = mid + 1
+			}
+		} else if nums[mid] < nums[high] { // 在数值小的一部分区间里
+			if nums[mid] < target && target <= nums[high] {
+				low = mid + 1
+			} else {
+				high = mid - 1
+			}
+		} else {
+			if nums[low] == nums[mid] {
+				low++
+			}
+			if nums[high] == nums[mid] {
+				high--
+			}
 		}
 	}
-	return slow
+	return false
 }
 
 给出测试输出语句
@@ -46,17 +68,17 @@ func combine(n int, k int) [][]int {
 }
 你能用同样的思路同样数量的解法用Python实现么，以此为开头，给出带注释完整代码
 class Solution:
-    def removeDuplicates(self, nums: List[int]) -> int:
+    def search(self, nums: List[int], target: int) -> bool:
 你能用同样的思路同样数量的解法用Java实现么，以此为开头，给出带注释完整代码
 class Solution {
-    public int removeDuplicates(int[] nums) {
+    public boolean search(int[] nums, int target) {
 
     }
 }
 你能用同样的思路同样数量的解法用c++实现么，以此为开头，给出带注释完整代码
 class Solution {
 public:
-    int removeDuplicates(vector<int>& nums) {
+    bool search(vector<int>& nums, int target) {
 
     }
 };
