@@ -28,37 +28,51 @@
 
 ```Prompt
 我们用中文交流，你能理解这段代码么，逐行加上注释
-func search(nums []int, target int) bool {
-	if len(nums) == 0 {
-		return false
+// 解法一
+func deleteDuplicates1(head *ListNode) *ListNode {
+	if head == nil {
+		return nil
 	}
-	low, high := 0, len(nums)-1
-	for low <= high {
-		mid := low + (high-low)>>1
-		if nums[mid] == target {
-			return true
-		} else if nums[mid] > nums[low] { // 在数值大的一部分区间里
-			if nums[low] <= target && target < nums[mid] {
-				high = mid - 1
-			} else {
-				low = mid + 1
-			}
-		} else if nums[mid] < nums[high] { // 在数值小的一部分区间里
-			if nums[mid] < target && target <= nums[high] {
-				low = mid + 1
-			} else {
-				high = mid - 1
-			}
+	if head.Next == nil {
+		return head
+	}
+	newHead := &ListNode{Next: head, Val: -999999}
+	cur := newHead
+	last := newHead
+	front := head
+	for front.Next != nil {
+		if front.Val == cur.Val {
+			// fmt.Printf("相同节点front = %v | cur = %v | last = %v\n", front.Val, cur.Val, last.Val)
+			front = front.Next
+			continue
 		} else {
-			if nums[low] == nums[mid] {
-				low++
-			}
-			if nums[high] == nums[mid] {
-				high--
+			if cur.Next != front {
+				// fmt.Printf("删除重复节点front = %v | cur = %v | last = %v\n", front.Val, cur.Val, last.Val)
+				last.Next = front
+				if front.Next != nil && front.Next.Val != front.Val {
+					last = front
+				}
+				cur = front
+				front = front.Next
+			} else {
+				// fmt.Printf("常规循环前front = %v | cur = %v | last = %v\n", front.Val, cur.Val, last.Val)
+				last = cur
+				cur = cur.Next
+				front = front.Next
+				// fmt.Printf("常规循环后front = %v | cur = %v | last = %v\n", front.Val, cur.Val, last.Val)
+
 			}
 		}
 	}
-	return false
+	if front.Val == cur.Val {
+		// fmt.Printf("相同节点front = %v | cur = %v | last = %v\n", front.Val, cur.Val, last.Val)
+		last.Next = nil
+	} else {
+		if cur.Next != front {
+			last.Next = front
+		}
+	}
+	return newHead.Next
 }
 
 给出测试输出语句
@@ -67,18 +81,43 @@ func combine(n int, k int) [][]int {
 
 }
 你能用同样的思路同样数量的解法用Python实现么，以此为开头，给出带注释完整代码
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
 class Solution:
-    def search(self, nums: List[int], target: int) -> bool:
+    def deleteDuplicates(self, head: Optional[ListNode]) -> Optional[ListNode]:
 你能用同样的思路同样数量的解法用Java实现么，以此为开头，给出带注释完整代码
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
 class Solution {
-    public boolean search(int[] nums, int target) {
+    public ListNode deleteDuplicates(ListNode head) {
 
     }
 }
 你能用同样的思路同样数量的解法用c++实现么，以此为开头，给出带注释完整代码
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
 class Solution {
 public:
-    bool search(vector<int>& nums, int target) {
+    ListNode* deleteDuplicates(ListNode* head) {
 
     }
 };
