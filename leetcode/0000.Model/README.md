@@ -28,22 +28,35 @@
 
 ```Prompt
 我们用中文交流，你能理解这段代码么，逐行加上注释
-/**
- * Definition for singly-linked list.
- * type ListNode struct {
- *     Val int
- *     Next *ListNode
- * }
- */
-func deleteDuplicates(head *ListNode) *ListNode {
-    if head == nil || head.Next == nil{
-        return head
-    }
-    head.Next = deleteDuplicates(head.Next)
-    if head.Val == head.Next.Val{
-        head = head.Next
-    }
-    return head
+func largestRectangleArea(heights []int) int {
+	maxArea := 0
+	n := len(heights) + 2
+	// Add a sentry at the beginning and the end
+	getHeight := func(i int) int {
+		if i == 0 || n-1 == i {
+			return 0
+		}
+		return heights[i-1]
+	}
+	st := make([]int, 0, n/2)
+	for i := 0; i < n; i++ {
+		for len(st) > 0 && getHeight(st[len(st)-1]) > getHeight(i) {
+			// pop stack
+			idx := st[len(st)-1]
+			st = st[:len(st)-1]
+			maxArea = max(maxArea, getHeight(idx)*(i-st[len(st)-1]-1))
+		}
+		// push stack
+		st = append(st, i)
+	}
+	return maxArea
+}
+
+func max(a int, b int) int {
+	if a > b {
+		return a
+	}
+	return b
 }
 
 给出测试输出语句
@@ -52,43 +65,18 @@ func combine(n int, k int) [][]int {
 
 }
 你能用同样的思路同样数量的解法用Python实现么，以此为开头，给出带注释完整代码
-# Definition for singly-linked list.
-# class ListNode:
-#     def __init__(self, val=0, next=None):
-#         self.val = val
-#         self.next = next
 class Solution:
-    def deleteDuplicates(self, head: Optional[ListNode]) -> Optional[ListNode]:
+    def largestRectangleArea(self, heights: List[int]) -> int:
 你能用同样的思路同样数量的解法用Java实现么，以此为开头，给出带注释完整代码
-/**
- * Definition for singly-linked list.
- * public class ListNode {
- *     int val;
- *     ListNode next;
- *     ListNode() {}
- *     ListNode(int val) { this.val = val; }
- *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
- * }
- */
 class Solution {
-    public ListNode deleteDuplicates(ListNode head) {
+    public int largestRectangleArea(int[] heights) {
 
     }
 }
 你能用同样的思路同样数量的解法用c++实现么，以此为开头，给出带注释完整代码
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode() : val(0), next(nullptr) {}
- *     ListNode(int x) : val(x), next(nullptr) {}
- *     ListNode(int x, ListNode *next) : val(x), next(next) {}
- * };
- */
 class Solution {
 public:
-    ListNode* deleteDuplicates(ListNode* head) {
+    int largestRectangleArea(vector<int>& heights) {
 
     }
 };
