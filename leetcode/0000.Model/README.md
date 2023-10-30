@@ -28,35 +28,37 @@
 
 ```Prompt
 我们用中文交流，你能理解这段代码么，逐行加上注释
-func largestRectangleArea(heights []int) int {
-	maxArea := 0
-	n := len(heights) + 2
-	// Add a sentry at the beginning and the end
-	getHeight := func(i int) int {
-		if i == 0 || n-1 == i {
-			return 0
-		}
-		return heights[i-1]
-	}
-	st := make([]int, 0, n/2)
-	for i := 0; i < n; i++ {
-		for len(st) > 0 && getHeight(st[len(st)-1]) > getHeight(i) {
-			// pop stack
-			idx := st[len(st)-1]
-			st = st[:len(st)-1]
-			maxArea = max(maxArea, getHeight(idx)*(i-st[len(st)-1]-1))
-		}
-		// push stack
-		st = append(st, i)
-	}
-	return maxArea
-}
-
-func max(a int, b int) int {
-	if a > b {
-		return a
-	}
-	return b
+func maximalRectangle(matrix [][]byte) int {
+    m, n := len(matrix), len(matrix[0])
+    heights := make([]int, n+1)
+    res := 0
+    stack := []int{-1}
+    max := func(x, y int) int {
+        if x > y {
+            return x
+        }
+        return y
+    }
+    for i := 0; i < m; i++ {
+        for j := 0; j <= n; j++ {
+            if j < n && matrix[i][j] == '1' {
+                heights[j]++
+            } else {
+                heights[j] = 0
+            }
+            top := stack[len(stack)-1]
+            for top != -1 && heights[top] >= heights[j] {
+                stack = stack[:len(stack)-1]
+                left := stack[len(stack)-1]
+                res = max(res, heights[top]*(j-left-1))
+                top = left
+            }
+            if j < n {
+                stack = append(stack, j)
+            }
+        }
+    }
+    return res
 }
 
 给出测试输出语句
@@ -66,18 +68,18 @@ func combine(n int, k int) [][]int {
 }
 你能用同样的思路同样数量的解法用Python实现么，以此为开头，给出带注释完整代码
 class Solution:
-    def largestRectangleArea(self, heights: List[int]) -> int:
+    def maximalRectangle(self, matrix: List[List[str]]) -> int:
 你能用同样的思路同样数量的解法用Java实现么，以此为开头，给出带注释完整代码
 class Solution {
-    public int largestRectangleArea(int[] heights) {
+    public int maximalRectangle(char[][] matrix) {
 
     }
 }
 你能用同样的思路同样数量的解法用c++实现么，以此为开头，给出带注释完整代码
 class Solution {
 public:
-    int largestRectangleArea(vector<int>& heights) {
-
+    int maximalRectangle(vector<vector<char>>& matrix) {
+        
     }
 };
 我们用中文交流，分开介绍每个版本的所需要掌握的详细基础知识
