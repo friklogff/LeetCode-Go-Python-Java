@@ -28,75 +28,60 @@
 
 ```Prompt
 我们用中文交流，你能理解这段代码么，逐行加上注释
-/**
- * Definition for singly-linked list.
- * type ListNode struct {
- *     Val int
- *     Next *ListNode
- * }
- */
-func partition(head *ListNode, x int) *ListNode {
-    dummy1,dummy2:=&ListNode{-1,nil},&ListNode{-101,nil}
-    p1,p2:=dummy1,dummy2
-    p:=head
-    for p!=nil{
-        if p.Val>=x{
-            p1.Next=p
-            p1=p1.Next
-        }else{
-            p2.Next=p
-            p2=p2.Next
-        }
-        tmp:=p.Next
-        p.Next=nil
-        p=tmp
-    }
-    p2.Next=dummy1.Next
-    return dummy2.Next
+
+func isScramble(s1 string, s2 string) bool {
+	n := len(s1)
+	memo := make([][][]byte, n)
+	for i, _ := range memo {
+		memo[i] = make([][]byte, n)
+		for j, _ := range memo[i] {
+			memo[i][j] = make([]byte, n+1)
+		}
+	}
+	var dp func(int, int, int) bool
+	dp = func(i, j, l int) bool {
+		if l == 1 {
+			return s1[i] == s2[j]
+		}
+		if v := memo[i][j][l]; v != 0 {
+			return v == 1
+		}
+		result := false
+		for s := 1; s <= l-1; s++ {
+			// s1[i..s]
+			if c1, c2 := dp(i, j, s) && dp(i+s, j+s, l-s), dp(i, j+l-s, s) && dp(i+s, j, l-s); c1 || c2 {
+				result = true
+				break
+			}
+		}
+		if result {
+			memo[i][j][l] = 1
+		} else {
+			memo[i][j][l] = 2
+		}
+		return result
+	}
+	return dp(0, 0, n)
 }
+ 
 给出测试输出语句
 你能用同样的思路同样数量的解法用go实现么，以此为开头，给出带注释完整代码
 func combine(n int, k int) [][]int {
 
 }
 你能用同样的思路同样数量的解法用Python实现么，以此为开头，给出带注释完整代码
-# Definition for singly-linked list.
-# class ListNode:
-#     def __init__(self, val=0, next=None):
-#         self.val = val
-#         self.next = next
 class Solution:
-    def partition(self, head: Optional[ListNode], x: int) -> Optional[ListNode]:
+    def isScramble(self, s1: str, s2: str) -> bool:
 你能用同样的思路同样数量的解法用Java实现么，以此为开头，给出带注释完整代码
-/**
- * Definition for singly-linked list.
- * public class ListNode {
- *     int val;
- *     ListNode next;
- *     ListNode() {}
- *     ListNode(int val) { this.val = val; }
- *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
- * }
- */
 class Solution {
-    public ListNode partition(ListNode head, int x) {
+    public boolean isScramble(String s1, String s2) {
 
     }
 }
 你能用同样的思路同样数量的解法用c++实现么，以此为开头，给出带注释完整代码
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode() : val(0), next(nullptr) {}
- *     ListNode(int x) : val(x), next(nullptr) {}
- *     ListNode(int x, ListNode *next) : val(x), next(next) {}
- * };
- */
 class Solution {
 public:
-    ListNode* partition(ListNode* head, int x) {
+    bool isScramble(string s1, string s2) {
 
     }
 };

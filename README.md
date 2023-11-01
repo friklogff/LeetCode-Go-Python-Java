@@ -182,6 +182,10 @@ https://github.com/halfrost/LeetCode-Go
 - 2023-10-29
   - 0084.Largest-Rectangle-in-Histogram
 - 2023-10-30
-  - 0075.Sort-Colors
+  - 0085.Largest-Rectangle-in-Histogram
 - 2023-10-31
-  - 0076.Minimum-Window-Substring
+  - 0086.Partition-List
+- 2023-11-01
+  - 0087.Partition-List
+- 2023-11-02
+  - 0088.Merge-Sorted-Array
